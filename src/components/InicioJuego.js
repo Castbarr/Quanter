@@ -5,7 +5,7 @@ class InicioJuego extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('icono', '/icons/favicon-128x128.png');
+    this.load.image('icono', './icons/favicon-128x128.png');
   }
 
   create() {

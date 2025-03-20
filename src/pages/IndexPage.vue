@@ -22,7 +22,7 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import game from 'src/components/game.js';
+import game from '/src/components/game.js';
 
 onMounted(() => {
 const gameContainer = document.getElementById('game-container');
