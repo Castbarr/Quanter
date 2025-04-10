@@ -4,17 +4,18 @@
   <q-toolbar>
     <q-toolbar-title>
       <q-avatar>
-        <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+        <img src="favicon.ico" alt="Logo" />
       </q-avatar>
-      Quanter
+      <span class="q-ml-xs">Compu-Apprende</span>
     </q-toolbar-title>
+    <q-tabs align="center">
+    <q-btn color="white" text-color="black" label="Reiniciar" @click="reiniciar"/>
+    <q-btn color="white" text-color="black" label="Menú" @click="menuIniciado"/>
+    <q-btn color="white" text-color="black" label="Iniciar"/>
+  </q-tabs>
   </q-toolbar>
 
-  <q-tabs align="center">
-    <q-route-tab to="/page1" label="Page One" />
-    <q-btn color="white" text-color="black" label="Jugar" @click="changeScene"/>
-    <q-route-tab to="/page3" label="Page Three" />
-  </q-tabs>
+  
 </q-header>
    <div id="game-container"></div>
   </q-page>
@@ -45,10 +46,16 @@ onBeforeUnmount(() => {
   document.removeEventListener('click', toggleHeader);
 });
 
-function changeScene() {
-  const juegoIniciado = game.scene.keys['Menu'];
-  if (juegoIniciado) {
-    juegoIniciado.scene.start('InicioJuego');
+function menuIniciado() {
+  const menuIniciado = game.scene.keys['Portada'];
+  if (menuIniciado) {
+    menuIniciado.scene.start('MenuPrincipal');
+  }
+}
+function reiniciar() {
+  const reiniciar = game.scene.keys['MenuPrincipal'];
+  if (reiniciar) {
+    reiniciar.scene.start('Portada');
   }
 }
 </script>

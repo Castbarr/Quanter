@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
-import InicioJuego from './InicioJuego';
-import Menu from './menu';
+import MenuPrincipal from './MenuPrincipal';
+import Portada from './Portada';
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
+    width: 1000,
     height: 600,
     parent: 'game-container',
     scale: {
@@ -13,13 +13,13 @@ const config = {
     },
     scene:[
     {create}, 
-    Menu,
-    InicioJuego
+    Portada,
+    MenuPrincipal
 ]
 };
 
  function create() {
-    this.scene.start('Menu');
+    this.scene.start('Portada');
 }
 
 const game = new Phaser.Game(config);
