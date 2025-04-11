@@ -6,9 +6,9 @@ class Portada extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('fondo', 'src/assets/FondoJuegoComputacion.png');
-    this.load.image('logoCompu', 'src/assets/LogoCompu.png');
-    this.load.image('flecha', 'src/assets/flecha.png');
+    this.load.image('fondo', './assets/FondoJuegoComputacion.png');
+    this.load.image('logoCompu', './assets/LogoCompu.png');
+    this.load.image('flecha', './assets/flecha.png');
   }
 
   create() {

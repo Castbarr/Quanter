@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <q-header v-show="showHeader" elevated class="bg-primary text-white" height-hint="98">
+    <q-header v-show="showHeader" elevated class="bg-secondary text-white" height-hint="98">
   <q-toolbar>
     <q-toolbar-title>
       <q-avatar>
@@ -9,9 +9,9 @@
       <span class="q-ml-xs">Compu-Apprende</span>
     </q-toolbar-title>
     <q-tabs align="center">
-    <q-btn color="white" text-color="black" label="Reiniciar" @click="reiniciar"/>
-    <q-btn color="white" text-color="black" label="Menú" @click="menuIniciado"/>
-    <q-btn color="white" text-color="black" label="Iniciar"/>
+    <q-btn flat color="primary" text-color="black" label="Sobre el Juego"/>
+    <q-btn flat color="primary" text-color="black" label="Menú" @click="menuIniciado"/>
+    <q-btn flat color="primary" text-color="black" label="Reiniciar" @click="reiniciar"/>
   </q-tabs>
   </q-toolbar>
 
