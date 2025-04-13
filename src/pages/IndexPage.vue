@@ -53,11 +53,15 @@ function menuIniciado() {
   }
 }
 function reiniciar() {
-  const reiniciar = game.scene.keys['MenuPrincipal'];
-  if (reiniciar) {
-    reiniciar.scene.start('Portada');
-  }
+  // Detener todas las escenas activas
+  game.scene.getScenes(true).forEach(scene => {
+    game.scene.stop(scene.scene.key);
+  });
+
+  // Iniciar la escena de inicio (Portada)
+  game.scene.start('Portada');
 }
+
 </script>
 <style scoped>
 </style>

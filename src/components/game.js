@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import MenuPrincipal from './MenuPrincipal';
 import Portada from './Portada';
+import InicioBasico from './InicioBasico';
 
 const config = {
     type: Phaser.AUTO,
@@ -14,7 +15,8 @@ const config = {
     scene:[
     {create}, 
     Portada,
-    MenuPrincipal
+    MenuPrincipal,
+    InicioBasico
 ]
 };
 
