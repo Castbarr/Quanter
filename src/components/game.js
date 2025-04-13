@@ -17,7 +17,9 @@ const config = {
     Portada,
     MenuPrincipal,
     InicioBasico
-]
+],
+
+
 };
 
  function create() {
