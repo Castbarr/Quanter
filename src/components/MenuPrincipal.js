@@ -5,11 +5,11 @@ class MenuPrincipal extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('fondoMenu', './assets/FondoMenu.png');
-    this.load.image('logoMenu', './assets/LogoMenu.png');
-    this.load.image('botonBasico', './assets/BotonBasico.png');
-    this.load.image('botonMedio', './assets/BotonMedio.png');
-    this.load.image('botonAvanzado', './assets/BotonAvanzado.png');
+    this.load.image('fondoMenu', './assets/imgMenu/FondoMenu.png');
+    this.load.image('logoMenu', './assets/imgMenu/LogoMenu.png');
+    this.load.image('botonBasico', './assets/imgMenu/BotonBasico.png');
+    this.load.image('botonMedio', './assets/imgMenu/BotonMedio.png');
+    this.load.image('botonAvanzado', './assets/imgMenu/BotonAvanzado.png');
   }
 
   create() {

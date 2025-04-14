@@ -25,7 +25,7 @@
           <span class="q-ml-xs">Compu-Apprende</span>
         </q-toolbar-title>
         <q-tabs align="center">
-          <q-btn flat color="primary" text-color="black" label="Sobre el Juego" />
+          <q-btn flat color="primary" text-color="black" label="Sobre el Juego" @click="sobreElJuego"/>
           <q-btn flat color="primary" text-color="black" label="Menú" @click="menuIniciado" />
           <q-btn flat color="primary" text-color="black" label="Reiniciar" @click="reiniciar" />
         </q-tabs>
@@ -40,6 +40,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import game from '/src/components/game.js';
+import Swal from 'sweetalert2';
 
 const showHeader = ref(false);
 const headerRef = ref(null);
@@ -73,6 +74,17 @@ function reiniciar() {
     game.scene.stop(scene.scene.key);
   });
   game.scene.start('Portada');
+}
+
+function sobreElJuego(){
+  Swal.fire({
+    title: 'Sobre el Juego',
+    html: `
+      <p>Este juego es un proyecto educativo diseñado para ayudar a los estudiantes a aprender sobre los fundamentos de la computación.</p>
+      <p>Desarrollado por: <strong>Tu Nombre</strong></p>
+    `,
+    grow: 'fullscreen',
+  })
 }
 </script>
 

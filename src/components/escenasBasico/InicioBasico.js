@@ -8,38 +8,42 @@ class InicioBasico extends Phaser.Scene {
     preload(){
         this.load.image('fondoPuerta', './assets/PuertaBasico.png');
         this.load.image('flecha', './assets/flecha.png');
-        this.load.image('cuadroClick', './assets/cuadroClick.png');
+        this.load.image('informacion', './assets/Exclamacion.png');
         this.load.image('libro', './assets/Libro.png');
     }
     create(){
         this.add.image(500, 300, 'fondoPuerta');
 
 
-        const cuadroClick = this.add.image(503, 260, 'cuadroClick').setInteractive();
-        cuadroClick.setAlpha(.1);
-        cuadroClick.setScale(0.6); // Cambiar el tamaño del cuadro
-        cuadroClick.on('pointerover', () => {
+        const informacion = this.add.image(503, 260, 'informacion').setInteractive();
+        informacion.setAlpha(.1);
+        informacion.setScale(0.6); // Cambiar el tamaño del cuadro
+        informacion.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            cuadroClick.setScale(0.65); // Aumentar tamaño al pasar el ratón
+            informacion.setScale(0.65); // Aumentar tamaño al pasar el ratón
         });
-        cuadroClick.on('pointerout', () => {
+        informacion.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            cuadroClick.setScale(0.6); // Volver al tamaño original 
+            informacion.setScale(0.6); // Volver al tamaño original 
         });
         this.tweens.add({
-            targets: cuadroClick,
+            targets: informacion,
             alpha: .2,           // Aparece
             duration: 1000,      
             ease: 'Sine.easeInOut',
             yoyo: true,         // Regresa a su tamaño original
             repeat: -1          // Infinito
         });
-        cuadroClick.on('pointerdown', () => {
+        informacion.on('pointerdown', () => {
             Swal.fire({
                  title: '¡Estoy atrapado!',
                  text: 'Tengo que encontrar la computadora de seguridad.¡Es mi unica oportunidad!',
                  confirmButtonText: 'Continuar',
                  position: 'bottom',
+                 imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                 imageWidth: 100, // Ancho de la imagen
+                 imageHeight: 100, // Alto de la imagen
+                 imageAlt: 'Exclamación', // Texto alternativo
              }).then((result) => {
                  if (result.isConfirmed) {
                      libro.setVisible(true);
@@ -68,6 +72,9 @@ class InicioBasico extends Phaser.Scene {
             yoyo: true,         // Regresa a su tamaño original
             repeat: -1          // Infinito
         });
+        flecha.on('pointerdown', () => {
+            this.scene.start('BasicoDos'); // Cambia a la escena BasicoDos
+        });   
         
 
 

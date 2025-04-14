@@ -56,7 +56,7 @@ let flecha; // Variable para almacenar la referencia a la imagen
 this.input.on('pointerdown', () => {
   if (!flecha) { // Verifica si la imagen ya fue creada
     flecha = this.add.image(900, 100, 'flecha');
-    flecha.setScale(0.5); // Escala inicial 
+    flecha.setScale(0.3); // Escala inicial 
 
     this.tweens.add({
       targets: flecha,
