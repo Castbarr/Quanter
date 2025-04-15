@@ -55,12 +55,13 @@ let flecha; // Variable para almacenar la referencia a la imagen
 
 this.input.on('pointerdown', () => {
   if (!flecha) { // Verifica si la imagen ya fue creada
-    flecha = this.add.image(900, 100, 'flecha');
-    flecha.setScale(0.3); // Escala inicial 
+    flecha = this.add.image(50, 25, 'flecha');
+    flecha.setScale(0.2); // Escala inicial 
+    flecha.angle = -90; // Rotar la flecha -90 grados
 
     this.tweens.add({
       targets: flecha,
-      y: '+=20',          // Se mueve 20 píxeles hacia abajo
+      x: '+=20',          // Se mueve 20 píxeles hacia abajo
       duration: 600,      // Tiempo del movimiento
       ease: 'Sine.easeInOut',
       yoyo: true,         // Vuelve hacia atrás

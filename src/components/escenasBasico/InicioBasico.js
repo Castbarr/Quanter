@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Swal from "sweetalert2";
+import {mostrarPuntos} from '../Puntos'
 
 class InicioBasico extends Phaser.Scene {
     constructor() {
@@ -13,18 +14,19 @@ class InicioBasico extends Phaser.Scene {
     }
     create(){
         this.add.image(500, 300, 'fondoPuerta');
+        mostrarPuntos(this); // Mostrar puntos en la escena
 
 
         const informacion = this.add.image(503, 260, 'informacion').setInteractive();
         informacion.setAlpha(.1);
-        informacion.setScale(0.6); // Cambiar el tamaño del cuadro
+        informacion.setScale(0.5); // Cambiar el tamaño del cuadro
         informacion.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            informacion.setScale(0.65); // Aumentar tamaño al pasar el ratón
+            informacion.setScale(0.6); // Aumentar tamaño al pasar el ratón
         });
         informacion.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            informacion.setScale(0.6); // Volver al tamaño original 
+            informacion.setScale(0.5); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: informacion,
@@ -54,15 +56,15 @@ class InicioBasico extends Phaser.Scene {
 
         const flecha = this.add.image(900, 300, 'flecha').setInteractive();
         flecha.angle = 90; // Rotar la flecha 45 grados
-        flecha.setScale(0.3); // Cambiar el tamaño de la flecha
+        flecha.setScale(0.2); // Cambiar el tamaño de la flecha
         flecha.setVisible(false);
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.4); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            flecha.setScale(0.3); // Volver al tamaño original 
+            flecha.setScale(0.2); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: flecha,
