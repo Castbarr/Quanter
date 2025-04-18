@@ -5,6 +5,11 @@ import Portada from './Portada';
 import InicioBasico from './escenasBasico/InicioBasico';
 import BasicoDos from './escenasBasico/BasicoDos';
 import BasicoTres from './escenasBasico/BasicoTres';
+import BasicoCuatro from './escenasBasico/BasicoCuatro';
+import BasicoCinco from './escenasBasico/BasicoCinco';
+import BasicoSeis from './escenasBasico/BasicoSeis';
+import BasicoSiete from './escenasBasico/BasicoSiete';
+import BasicoOcho from './escenasBasico/BasicoOcho';
 
 
 const config = {
@@ -17,12 +22,8 @@ const config = {
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
   scene: [
-    EscenaArranque,         // 👈 Esta inicia primero
-    Portada,
-    MenuPrincipal,
-    InicioBasico,
-    BasicoDos,
-    BasicoTres
+    EscenaArranque, Portada, MenuPrincipal, 
+    InicioBasico, BasicoDos, BasicoTres, BasicoCuatro, BasicoCinco, BasicoSeis, BasicoSiete, BasicoOcho
   ]
 };
 

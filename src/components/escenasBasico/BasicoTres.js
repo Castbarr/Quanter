@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import {mostrarPuntos} from '../Puntos'
 import Swal from "sweetalert2";
 
+
 class BasicoTres extends Phaser.Scene{
     constructor(){
         super({ key: 'BasicoTres' });
@@ -11,10 +12,19 @@ class BasicoTres extends Phaser.Scene{
         this.load.image('flecha', './assets/flecha.png');
         this.load.image('informacion', './assets/Exclamacion.png');
         this.load.image('pregunta', './assets/Globo.png');
+        this.load.json('respuestas', './assets/respuestas.json'); // Cargar el archivo JSON
     }
     create(){
+        this.cameras.main.fadeIn(500, 0, 0, 0);
         this.add.image(500, 300, 'oficinaSeguridad');
         mostrarPuntos(this);
+
+        const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
+        const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasUno);  ; // Obtener la respuesta correcta del JSON
+        const respuestaIncorrecta = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasUno); // Obtener la respuesta incorrecta del JSON
+        const respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasUno); // Obtener la respuesta incorrecta del JSON
+        const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
+        Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
 
 
         const flecha = this.add.image(80, 300, 'flecha').setInteractive();
@@ -37,10 +47,18 @@ class BasicoTres extends Phaser.Scene{
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
-            this.scene.start('BasicoDos'); 
+            this.cameras.main.fadeOut(500, 0, 0, 0);
+            this.cameras.main.once('camerafadeoutcomplete', () => {
+            this.scene.start('BasicoDos'); // Cambia a la escena BasicoDos
+            });
         });
 
 
+        const opciones = {
+            'a': grupoRespuestas[0],
+            'b': grupoRespuestas[1],
+            'c': grupoRespuestas[2],
+        };
         const pregunta = this.add.image(550, 250, 'pregunta').setInteractive();
         pregunta.setScale(0.8);
         pregunta.setVisible(false);
@@ -61,30 +79,70 @@ class BasicoTres extends Phaser.Scene{
             repeat: -1          // Infinito
         });
         pregunta.on('pointerdown', () => {
+            pregunta.setVisible(false); // Ocultar el cuadro de información 
             Swal.fire({
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__zoomIn
+                      animate__faster  `
+                  },
+                hideClass: {
+                    popup: `
+                        animate__animated
+                        animate__zoomOut
+                        animate__faster
+                    `
+                        },
                 title: '¿Qué es una Computadora?',
                 input: 'radio',
-                position: 'center-end',
-                inputOptions: {
-                  'a': 'Es un dispositivo electrónico que procesa datos y realiza cálculos',
-                  'b': 'Es un dispositivo que solo sirve para navegar por Internet',
-                  'c': 'Es un dispositivo que solo sirve para jugar videojuegos',
-                },
+                allowOutsideClick: false,
+                inputOptions: opciones,
                 inputValidator: (value) => {
                   if (!value) {
                     return '¡Debes seleccionar una respuesta!';
                   }
                 },
-                showCancelButton: true,
+                showCancelButton:false,
                 confirmButtonText: 'Responder',
                 preConfirm: (respuesta) => {
+                  const respuestaSeleccionada = opciones[respuesta]; // Obtener la respuesta seleccionada
                   const puntos = this.registry.get('puntos');
-                  if (respuesta !== 'a') {
+                  if (respuestaSeleccionada !== respuestaCorrecta) {
+                    console.log(respuestaIncorrecta, respuestaIncorrectaDos);
+                    console.log(respuestaSeleccionada);
+                    pregunta.setVisible(true);  
                     Swal.fire('Incorrecto', `Puntos restantes: ${puntos - 1}`, 'error');
                     this.registry.set('puntos', puntos - 1);
                   } else {
-                     Swal.fire('¡Correcto!', 'Muy bien resuelto', 'success');
-                      this.scene.start('BasicoDos');
+                     Swal.fire({
+                        showClass: {
+                            popup: `
+                              animate__animated
+                              animate__fadeInUp
+                              animate__faster
+                            `
+                          },
+                        hideClass: {
+                            popup: `
+                                animate__animated
+                                animate__fadeOutDown
+                                animate__faster
+                        `
+                          },
+                        title: '¡Perfecto!',
+                        text: 'Logre entrar. ¡A buscar la computadora!',
+                        confirmButtonText: 'Continuar',
+                        allowOutsideClick: false,
+                        imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                        imageWidth: 100, // Ancho de la imagen
+                        imageHeight: 100, // Alto de la imagen
+                        imageAlt: 'Exclamación', // Texto alternativo
+                    });
+                    this.cameras.main.fadeOut(500, 0, 0, 0);
+                    this.cameras.main.once('camerafadeoutcomplete', () => {
+                    this.scene.start('BasicoCuatro'); // Cambia a la escena BasicoDos
+                    });
                   }
                 }
               });
@@ -94,7 +152,8 @@ class BasicoTres extends Phaser.Scene{
 
         const informacion = this.add.image(450, 300, 'informacion').setInteractive();
         informacion.setScale(0.4);
-        informacion.setAlpha(.1); 
+        informacion.setAlpha(.1);
+        informacion.setVisible(true); 
         informacion.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             informacion.setScale(0.5); // Aumentar tamaño al pasar el ratón
@@ -112,11 +171,26 @@ class BasicoTres extends Phaser.Scene{
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
+            informacion.setVisible(false); // Ocultar el cuadro de información
             Swal.fire({
-                title: '¡Responde la pregunta de seguridad!',
-                text: 'Me está pidiendo que responda una pregunta de opción múltiple para poder ingresar.¡Si no la resuelvo no podré ingresar!',
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeInUp
+                      animate__faster
+                    `
+                  },
+                hideClass: {
+                    popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                `
+                  },
+                title: '¡Puerta bloqueda!',
+                text: 'Necesito responder correctamente la pregunta de seguridad.¡Si no la resuelvo no podré ingresar!',
                 confirmButtonText: 'Continuar',
-                position: 'bottom',
+                allowOutsideClick: false,
                 imageUrl: './assets/Personaje.png', // Ruta de la imagen
                 imageWidth: 100, // Ancho de la imagen
                 imageHeight: 100, // Alto de la imagen

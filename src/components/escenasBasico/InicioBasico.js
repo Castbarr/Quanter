@@ -13,13 +13,17 @@ class InicioBasico extends Phaser.Scene {
         this.load.image('libro', './assets/Libro.png');
     }
     create(){
+        this.cameras.main.fadeIn(500, 0, 0, 0);
         this.add.image(500, 300, 'fondoPuerta');
         mostrarPuntos(this); // Mostrar puntos en la escena
+        const puntos = this.registry.get('puntos');
+        this.registry.set('puntos', puntos +10);
 
 
         const informacion = this.add.image(503, 260, 'informacion').setInteractive();
         informacion.setAlpha(.1);
         informacion.setScale(0.5); // Cambiar el tamaño del cuadro
+        informacion.setVisible(true);
         informacion.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             informacion.setScale(0.6); // Aumentar tamaño al pasar el ratón
@@ -37,11 +41,26 @@ class InicioBasico extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
+            informacion.setVisible(false); // Ocultar el cuadro de información
             Swal.fire({
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeInUp
+                      animate__faster
+                    `
+                  },
+                  hideClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeOutDown
+                      animate__faster
+                    `
+                  },
                  title: '¡Estoy atrapado!',
                  text: 'Tengo que encontrar la computadora de seguridad.¡Es mi unica oportunidad!',
                  confirmButtonText: 'Continuar',
-                 position: 'bottom',
+                 allowOutsideClick: false,
                  imageUrl: './assets/Personaje.png', // Ruta de la imagen
                  imageWidth: 100, // Ancho de la imagen
                  imageHeight: 100, // Alto de la imagen
@@ -75,21 +94,24 @@ class InicioBasico extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
+            this.cameras.main.fadeOut(500, 0, 0, 0);
+            this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoDos'); // Cambia a la escena BasicoDos
+            });
         });   
         
 
 
         const libro = this.add.image(890, 100, 'libro').setInteractive();
-        libro.setScale(0.3); // Cambiar el tamaño del libro
+        libro.setScale(0.2); // Cambiar el tamaño del libro
         libro.setVisible(false);
         libro.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            libro.setScale(0.4); // Aumentar tamaño al pasar el ratón
+            libro.setScale(0.3); // Aumentar tamaño al pasar el ratón
         });
         libro.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            libro.setScale(0.3); // Volver al tamaño original 
+            libro.setScale(0.2); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: libro,
@@ -101,15 +123,24 @@ class InicioBasico extends Phaser.Scene {
         });
         libro.on('pointerdown', () => {
             Swal.fire({
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeInTopRight
+                      animate__faster  `
+                  },
+                  hideClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeOutTopRight
+                      animate__faster
+                    `
+                  },
                  title: '¿Qué es una computadora?',
-                 text: 'Una computadora es como una gran caja de herramientas inteligente diseñada para ayudarte a hacer todo tipo de tareas.\
-                 Piensa en ella como un conjunto de partes trabajando juntas: tiene un cerebro (procesador) que ejecuta instrucciones súper rápido,\
-                 una memoria (RAM) para recordar cosas mientras trabaja, y un espacio para guardar tus archivos y programas (disco duro o SSD).\
-                 Tú interactúas con ella a través de una pantalla, teclado, mouse, o incluso tu voz, y es capaz de conectarse con otros dispositivos\
-                 o la internet para ampliar lo que puede hacer. Básicamente, es una máquina que combina tecnología y lógica para transformar tus ideas\
-                 en acciones.',
+                 text: 'Una computadora es una máquina electrónica que procesa información y ejecuta tareas según instrucciones.\
+                 Es esencialmente un cerebro digital que ayuda en el trabajo, el entretenimiento y la comunicación.',
                  confirmButtonText: 'Continuar',
-                 position: 'top-end',
+                 allowOutsideClick: false,
                  background: 'transparent url(./assets/Pergamino.png)',
              }).then((result) => {
                 if (result.isConfirmed) {

@@ -1,0 +1,68 @@
+{
+    "respuestasCorrectasUno":[
+        "Un cerebro digital para procesar información.",
+        "Una máquina que ejecuta tareas electrónicas.",
+        "Tecnología clave para trabajo y entretenimiento.",
+        "Un dispositivo esencial para la comunicación.",
+        "Aparato que procesa datos y sigue instrucciones.",
+        "Un asistente digital para múltiples funciones.",
+        "Herramienta indispensable en la era moderna.",
+        "Un sistema que facilita la productividad.",
+        "Máquina electrónica que transforma datos en resultados.",
+        "Computadora: el núcleo del mundo digital."
+    ],
+    "respuestasIncorrectasUno":[
+        "Un cerebro digital que solo funciona con internet.",
+        "Máquina electrónica que necesita estar conectada a un celular.",
+        "Tecnología clave que no puede realizar cálculos complejos.",
+        "Un dispositivo esencial que no almacena información.",
+        "Procesa datos, pero solo si son imágenes.",
+        "Un asistente digital que solo responde en voz alta.",
+        "Herramienta indispensable que no puede conectarse a la red.",
+        "Un sistema que funciona mejor cuando está apagado.",
+        "Máquina electrónica que solo ejecuta tareas manuales.",
+        "Computadora: el único dispositivo que no usa electricidad."
+        
+    ],
+    "respuestasCorrectasDos":[
+        "Dos: Hardware y software."
+    ],
+    "respuestasIncorrectasDos":[
+        "Solo tiene teclado.",
+        "Dos: el monitor y el mouse.",
+        "Tres: Sistema operativo, procesador y batería.",
+        "Solo el disco duro importa.",
+        "Funciona solo con internet.",
+        "Dos: impresora y audífonos.",
+        "Solo el software, sin hardware.",
+        "Dos: Electricidad y datos almacenados.",
+        "Dos: Tarjeta SIM y antena de señal.",
+        "Dos: Íconos y fondo de pantalla."
+    ],
+    "respuestasCorrectasTres":[
+        "La placa base y el procesador.",
+        "El procesador y la memoria RAM.",
+        "La tarjeta gráfica y la refrigeración.",
+        "La fuente de alimentación y el disco duro.",
+        "El disco duro y la placa base.",
+        "La motherboard y el CPU.",
+        "La memoria RAM y la tarjeta gráfica.",
+        "La refrigeración y el CPU.",
+        "El disco duro y la fuente de alimentación.",
+        "La placa base y el disco duro."
+        
+    ],
+    "respuestasIncorrectasTres":[
+        "La placa base y el mouse.",
+        "El teclado y la memoria RAM.",
+        "La tarjeta gráfica y la carcasa.",
+        "El monitor y el disco duro.",
+        "El disco duro y la memoria USB.",
+        "La cámara web y el CPU.",
+        "La memoria RAM y la impresora.",
+        "Disco duro externo y el CPU",
+        "El disco duro y los audífonos.",
+        "El micrófono y el disco duro."
+        
+    ]
+}

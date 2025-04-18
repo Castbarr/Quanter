@@ -29,7 +29,10 @@ class MenuPrincipal extends Phaser.Scene {
       botonBasico.setScale(0.5); // Volver al tamaño original 
     });
     botonBasico.on('pointerdown', () => {
-      this.scene.start('InicioBasico'); // Cambia a la escena de InicioBasico
+      this.cameras.main.fadeOut(500, 0, 0, 0);
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+      this.scene.start('InicioBasico'); 
+      });
   });  
 
     const botonMedio = this.add.image(300, 300, 'botonMedio').setInteractive();
