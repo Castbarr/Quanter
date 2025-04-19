@@ -7,11 +7,6 @@ class BasicoCuatro extends Phaser.Scene {
         super({ key: 'BasicoCuatro' });
     }
     preload(){
-        this.load.image('oficinaSeguridadInterna', './assets/OficinaSeguridadInterna.png');
-        this.load.image('flecha', './assets/flecha.png');
-        this.load.image('informacion', './assets/Exclamacion.png');
-        this.load.image('pregunta', './assets/Globo.png');
-        this.load.json('respuestas', './assets/respuestas.json'); // Cargar el archivo JSON
     }
 
     create(){
@@ -93,11 +88,11 @@ class BasicoCuatro extends Phaser.Scene {
                         `
                           },
                         title: '¡Computadoras bloqueadas!',
-                        text: 'Necesito acceder una computadora para saber cual es la de seguridad\
-                        que desbloquea los accesos.¡Vere si acierto a la pregunta de desbloqueo!',
+                        html: `<p>Necesito acceder una computadora para saber cual es la de seguridad
+                        que desbloquea los accesos.¡Vere si acierto a la pregunta de desbloqueo!</p>`,
                         confirmButtonText: 'Continuar',
                         allowOutsideClick: false,
-                        imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                        imageUrl: globalThis.personaje, // Ruta de la imagen
                         imageWidth: 100, // Ancho de la imagen
                         imageHeight: 100, // Alto de la imagen
                         imageAlt: 'Exclamación', // Texto alternativo
@@ -154,8 +149,8 @@ class BasicoCuatro extends Phaser.Scene {
                     input: 'radio',
                     allowOutsideClick: false,
                     imageUrl: './assets/MonitorSeguridad.png', // Ruta de la imagen
-                    imageWidth: 288, // Ancho de la imagen
-                    imageHeight: 225, // Alto de la imagen
+                    imageWidth: 199, // Ancho de la imagen
+                    imageHeight: 156, // Alto de la imagen
                     imageAlt: 'Exclamación', // Texto alternativo
                     inputOptions: opciones,
                     inputValidator: (value) => {
@@ -170,8 +165,21 @@ class BasicoCuatro extends Phaser.Scene {
                         const puntos = this.registry.get('puntos');
                         if (respuestaSeleccionada !== respuestaCorrecta) {
                         pregunta.setVisible(true);  
-                        Swal.fire('Incorrecto', `Puntos restantes: ${puntos - 1}`, 'error');
-                        this.registry.set('puntos', puntos - 1);
+                        Swal.fire({
+                            title: '¡Incorrecto!',
+                            html: `<p>Puntos restantes: ${puntos - 1}</p>`,
+                            imageUrl: './assets/mano.gif', // Ruta de la imagen
+                            imageWidth: 100, // Ancho de la imagen
+                            imageHeight: 100, // Alto de la imagen
+                            imageAlt: 'personaje', // Texto alternativo
+                            confirmButtonText: 'Intentar de nuevo',
+                            allowOutsideClick: false,
+                        });
+                        this.registry.set('puntos', puntos - 1); // Restar un punto
+                            if (puntos === 1) {
+                            Swal.close(); // Cierra la alerta anterior
+                            this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                            }
                         } else {
                             Swal.fire({
                             showClass: {
@@ -189,10 +197,10 @@ class BasicoCuatro extends Phaser.Scene {
                             `
                                 },
                             title: '¡Perfecto!',
-                            text: 'Computadora desbloqueada. ¡Logre entrar!',
+                            html: `<p>Computadora desbloqueada. ¡Logre entrar!</p>`,
                             confirmButtonText: 'Continuar',
                             allowOutsideClick: false,
-                            imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                            imageUrl: globalThis.personaje, // Ruta de la imagen
                             imageWidth: 100, // Ancho de la imagen
                             imageHeight: 100, // Alto de la imagen
                             imageAlt: 'Exclamación', // Texto alternativo
@@ -243,9 +251,9 @@ class BasicoCuatro extends Phaser.Scene {
                     `
                   },
                  title: 'Partes de la computadora',
-                 text: 'Una computadora es una máquina compuesta por dos partes principales: el hardware y el software.\
-                 El hardware es todo lo que puedes tocar físicamente. El software, por otro lado, es la parte lógica, es decir,\
-                 los programas que hacen que el hardware funcione.',
+                 html: `<p>Una computadora es una máquina compuesta por dos partes principales: el hardware y el software.
+                 El hardware es todo lo que puedes tocar físicamente. El software, por otro lado, es la parte lógica, es decir,
+                 los programas que hacen que el hardware funcione.</p>`,
                  confirmButtonText: 'Continuar',
                  allowOutsideClick: false,
                  background: 'transparent url(./assets/Pergamino.png)',

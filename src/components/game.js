@@ -10,6 +10,7 @@ import BasicoCinco from './escenasBasico/BasicoCinco';
 import BasicoSeis from './escenasBasico/BasicoSeis';
 import BasicoSiete from './escenasBasico/BasicoSiete';
 import BasicoOcho from './escenasBasico/BasicoOcho';
+import BasicoNueve from './escenasBasico/BasicoNueve';
 
 
 const config = {
@@ -23,7 +24,7 @@ const config = {
   },
   scene: [
     EscenaArranque, Portada, MenuPrincipal, 
-    InicioBasico, BasicoDos, BasicoTres, BasicoCuatro, BasicoCinco, BasicoSeis, BasicoSiete, BasicoOcho
+    InicioBasico, BasicoDos, BasicoTres, BasicoCuatro, BasicoCinco, BasicoSeis, BasicoSiete, BasicoOcho, BasicoNueve
   ]
 };
 

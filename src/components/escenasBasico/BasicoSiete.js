@@ -7,9 +7,6 @@ class BasicoSiete extends Phaser.Scene {
         super({ key: "BasicoSiete" });
     }   
     preload() {
-        this.load.image("pasilloDos", "./assets/PasilloDos.png");
-        this.load.image("flecha", "./assets/flecha.png");
-        this.load.image("informacion", "./assets/Exclamacion.png");
     }
 
     create() {
@@ -83,10 +80,10 @@ class BasicoSiete extends Phaser.Scene {
                 `
                     },
                 title: '¡El almacen esta a la vuelta!',
-                text: 'Debo darme prisa.¡No tarda en activarse la seguridad extrema y estare en peligro!',
+                html: `<p>Debo darme prisa.¡No tarda en activarse la seguridad extrema y estare en peligro!</p>`,
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false,
-                imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                imageUrl: globalThis.personaje, // Ruta de la imagen
                 imageWidth: 100, // Ancho de la imagen
                 imageHeight: 100, // Alto de la imagen
                 imageAlt: 'Exclamación', // Texto alternativo

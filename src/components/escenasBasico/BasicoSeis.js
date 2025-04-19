@@ -6,8 +6,6 @@ class BasicoSeis extends Phaser.Scene {
         super({ key: "BasicoSeis" });
     }   
     preload() {
-        this.load.image("oficinaSeguridadInterna", "./assets/OficinaSeguridadInterna.png");
-        this.load.image("flecha", "./assets/flecha.png");
     }
     create() {
         this.cameras.main.fadeIn(500, 0, 0, 0);

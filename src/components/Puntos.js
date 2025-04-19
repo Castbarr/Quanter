@@ -14,6 +14,7 @@ export function mostrarPuntos(scene, x = 10, y = 10) {
       }else{
         console.warn("Intentando actualizar puntosText cuando ya no está activo o existe.");
       }
+      
     
     });
   

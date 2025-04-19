@@ -48,9 +48,6 @@ import { puntos } from '../components/EstadoJuego.js';
 import game from '/src/components/game.js';
 import Swal from 'sweetalert2';
 
-console.log("Valor inicial de puntos:", puntos.value);
-
-
 const showHeader = ref(false);
 const headerRef = ref(null);
 
@@ -75,6 +72,7 @@ function menuIniciado() {
 
 function reiniciar() {
   toggleHeader();
+  puntos.value = 0;
   game.scene.getScenes(true).forEach(scene => {
     game.scene.stop(scene.scene.key);
   });

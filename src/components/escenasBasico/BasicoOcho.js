@@ -1,21 +1,25 @@
 import Phaser from "phaser";
 import { mostrarPuntos } from "../Puntos";
-//import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 class BasicoOcho extends Phaser.Scene {
     constructor() {
         super({ key: "BasicoOcho" });
     }   
     preload() {
-        this.load.image("puertaAlmacen", "./assets/PuertaAlmacen.png");
-        this.load.image("flecha", "./assets/flecha.png");
-        this.load.image("informacion", "./assets/Exclamacion.png");
     }
 
     create() {
         this.cameras.main.fadeIn(500, 0, 0, 0);
         this.add.image(500, 300, "puertaAlmacen");
         mostrarPuntos(this);
+
+        const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
+        const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasUno);  ; // Obtener la respuesta correcta del JSON
+        const respuestaIncorrecta = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasUno); // Obtener la respuesta incorrecta del JSON
+        const respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasUno); // Obtener la respuesta incorrecta del JSON
+        const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
+        Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
 
         const flecha = this.add.image(90, 300, 'flecha').setInteractive();
         flecha.angle = -90; // Rotar la flecha 45 grados
@@ -43,6 +47,171 @@ class BasicoOcho extends Phaser.Scene {
             this.scene.start('BasicoSiete'); // Cambia a la escena BasicoDos
             });
         });
+
+
+
+        const informacion = this.add.image(508, 250, 'informacion').setInteractive();
+        informacion.setScale(0.4);
+        informacion.setAlpha(.1);
+        informacion.setVisible(true); 
+        informacion.on('pointerover', () => {
+            this.input.setDefaultCursor('pointer');
+            informacion.setScale(0.5); // Aumentar tamaño al pasar el ratón
+        });
+        informacion.on('pointerout', () => {
+            this.input.setDefaultCursor('default');
+            informacion.setScale(0.4); // Volver al tamaño original 
+        });
+        this.tweens.add({
+            targets: informacion,
+            alpha: .3,           // Aparece
+            duration: 1000,      
+            ease: 'Sine.easeInOut',
+            yoyo: true,         // Regresa a su tamaño original
+            repeat: -1          // Infinito
+        });
+        informacion.on('pointerdown', () => {
+            informacion.setVisible(false); // Ocultar el cuadro de información
+            Swal.fire({
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeInUp
+                      animate__faster
+                    `
+                  },
+                hideClass: {
+                popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                `
+                  },
+                title: '¡Bloqueada!',
+                html: `<p>Todas las puertas estan protegidas con preguntas de seguridad.¡Ni hablar!</p>`,
+                confirmButtonText: 'Continuar',
+                allowOutsideClick: false,
+                imageUrl: globalThis.personaje, // Ruta de la imagen
+                imageWidth: 100, // Ancho de la imagen
+                imageHeight: 100, // Alto de la imagen
+                imageAlt: 'personaje', // Texto alternativo
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        pregunta.setVisible(true); // Mostrar la pregunta al hacer clic en el cuadro de información
+                    }
+                }) 
+        });
+
+
+
+       const opciones = {
+            'a': grupoRespuestas[0],
+            'b': grupoRespuestas[1],
+            'c': grupoRespuestas[2],
+        };
+        const pregunta = this.add.image(550, 250, 'pregunta').setInteractive();
+        pregunta.setScale(0.8);
+        pregunta.setVisible(false);
+        pregunta.on('pointerover', () => {
+            this.input.setDefaultCursor('pointer');
+            pregunta.setScale(0.9); // Aumentar tamaño al pasar el ratón
+        });
+        pregunta.on('pointerout', () => {
+            this.input.setDefaultCursor('default');
+            pregunta.setScale(0.8); // Volver al tamaño original 
+        });
+        this.tweens.add({
+            targets: pregunta,
+            alpha: .2,           // Aparece
+            duration: 1000,      
+            ease: 'Sine.easeInOut',
+            yoyo: true,         // Regresa a su tamaño original
+            repeat: -1          // Infinito
+        });
+        pregunta.on('pointerdown', () => {
+            pregunta.setVisible(false); // Ocultar el cuadro de información 
+            Swal.fire({
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__zoomIn
+                      animate__faster  `
+                  },
+                hideClass: {
+                    popup: `
+                        animate__animated
+                        animate__zoomOut
+                        animate__faster
+                    `
+                        },
+                title: '¿Qué es una Computadora?',
+                input: 'radio',
+                allowOutsideClick: false,
+                inputOptions: opciones,
+                inputValidator: (value) => {
+                  if (!value) {
+                    return '¡Debes seleccionar una respuesta!';
+                  }
+                },
+                showCancelButton:false,
+                confirmButtonText: 'Responder',
+                preConfirm: (respuesta) => {
+                  const respuestaSeleccionada = opciones[respuesta]; // Obtener la respuesta seleccionada
+                  const puntos = this.registry.get('puntos');
+                  if (respuestaSeleccionada !== respuestaCorrecta) {
+                    console.log(respuestaIncorrecta, respuestaIncorrectaDos);
+                    console.log(respuestaSeleccionada);
+                    pregunta.setVisible(true);  
+                    Swal.fire({
+                        title: '¡Incorrecto!',
+                        html: `<p>Puntos restantes: ${puntos - 1}</p>`,
+                        imageUrl: './assets/mano.gif', // Ruta de la imagen
+                        imageWidth: 100, // Ancho de la imagen
+                        imageHeight: 100, // Alto de la imagen
+                        imageAlt: 'personaje', // Texto alternativo
+                        confirmButtonText: 'Intentar de nuevo',
+                        allowOutsideClick: false,
+                    });
+                      this.registry.set('puntos', puntos - 1); // Restar un punto
+                      if (puntos === 1) {
+                        Swal.close(); // Cerrar el modal
+                        this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                      }
+                  } else {
+                     Swal.fire({
+                        showClass: {
+                            popup: `
+                              animate__animated
+                              animate__fadeInUp
+                              animate__faster
+                            `
+                          },
+                        hideClass: {
+                            popup: `
+                                animate__animated
+                                animate__fadeOutDown
+                                animate__faster
+                        `
+                          },
+                        title: '¡Perfecto!',
+                        html: `<p>Logre entrar. ¡A buscar la computadora!</p>`,
+                        confirmButtonText: 'Continuar',
+                        allowOutsideClick: false,
+                        imageUrl: globalThis.personaje, // Ruta de la imagen
+                        imageWidth: 100, // Ancho de la imagen
+                        imageHeight: 100, // Alto de la imagen
+                        imageAlt: 'Exclamación', // Texto alternativo
+                    });
+                    this.cameras.main.fadeOut(500, 0, 0, 0);
+                    this.cameras.main.once('camerafadeoutcomplete', () => {
+                    this.scene.start('BasicoNueve'); // Cambia a la escena BasicoDos
+                    });
+                  }
+                }
+              });
+              
+            });
+
 
     }
 }

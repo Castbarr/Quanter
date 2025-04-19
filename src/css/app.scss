@@ -1,1 +1,32 @@
 // app global css in SCSS form
+
+.swal2-title {
+  font-size: 24px !important;
+  font-weight: bold;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center;
+}
+
+.swal2-image {
+  margin-top: 5% !important;
+  margin-bottom: 0 !important;
+  display: block !important;
+}
+
+.swal2-html-container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  max-height: 30vh;
+  overflow-y: auto;
+  padding-right: 10px;
+  text-align: left;
+}
+
+.swal2-styled {
+  padding: 5px 10px !important;
+  margin-top: 0 !important;
+  background-color: rgb(207, 219, 229) !important;
+  border: 2px solid white !important; /* Puedes agregar un borde para que se vea */
+  color: rgb(108, 82, 141) !important;
+}

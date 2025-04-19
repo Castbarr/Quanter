@@ -6,12 +6,10 @@ class Portada extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('fondo', './assets/FondoJuegoComputacion.png');
-    this.load.image('logoCompu', './assets/LogoCompu.png');
-    this.load.image('flecha', './assets/flecha.png');
   }
 
   create() {
+    this.registry.set('puntos', 0);
     this.add.image(500, 300, 'fondo');
     const logo = this.add.image(500, 300, 'logoCompu');
      // Creamos el texto fuera de la pantalla (a la derecha)

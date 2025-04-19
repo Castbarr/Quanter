@@ -8,11 +8,6 @@ class BasicoTres extends Phaser.Scene{
         super({ key: 'BasicoTres' });
     }
     preload(){
-        this.load.image('oficinaSeguridad', './assets/OficinaSeguridad.png');
-        this.load.image('flecha', './assets/flecha.png');
-        this.load.image('informacion', './assets/Exclamacion.png');
-        this.load.image('pregunta', './assets/Globo.png');
-        this.load.json('respuestas', './assets/respuestas.json'); // Cargar el archivo JSON
     }
     create(){
         this.cameras.main.fadeIn(500, 0, 0, 0);
@@ -112,8 +107,21 @@ class BasicoTres extends Phaser.Scene{
                     console.log(respuestaIncorrecta, respuestaIncorrectaDos);
                     console.log(respuestaSeleccionada);
                     pregunta.setVisible(true);  
-                    Swal.fire('Incorrecto', `Puntos restantes: ${puntos - 1}`, 'error');
-                    this.registry.set('puntos', puntos - 1);
+                    Swal.fire({
+                        title: '¡Incorrecto!',
+                        html: `<p>Puntos restantes: ${puntos - 1}</p>`,
+                        imageUrl: './assets/mano.gif', // Ruta de la imagen
+                        imageWidth: 100, // Ancho de la imagen
+                        imageHeight: 100, // Alto de la imagen
+                        imageAlt: 'personaje', // Texto alternativo
+                        confirmButtonText: 'Intentar de nuevo',
+                        allowOutsideClick: false,
+                    });
+                    this.registry.set('puntos', puntos - 1); // Restar un punto
+                    if (puntos === 1) {
+                        Swal.close(); // Cierra la alerta de incorrecto
+                        this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                      }
                   } else {
                      Swal.fire({
                         showClass: {
@@ -131,10 +139,10 @@ class BasicoTres extends Phaser.Scene{
                         `
                           },
                         title: '¡Perfecto!',
-                        text: 'Logre entrar. ¡A buscar la computadora!',
+                        html: `<p>Logre entrar. ¡A buscar la computadora!</p>`,
                         confirmButtonText: 'Continuar',
                         allowOutsideClick: false,
-                        imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                        imageUrl: globalThis.personaje,
                         imageWidth: 100, // Ancho de la imagen
                         imageHeight: 100, // Alto de la imagen
                         imageAlt: 'Exclamación', // Texto alternativo
@@ -188,10 +196,10 @@ class BasicoTres extends Phaser.Scene{
                 `
                   },
                 title: '¡Puerta bloqueda!',
-                text: 'Necesito responder correctamente la pregunta de seguridad.¡Si no la resuelvo no podré ingresar!',
+                html: `<p>Necesito responder correctamente la pregunta de seguridad.¡Si no la resuelvo no podré ingresar!</p>`,
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false,
-                imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                imageUrl: globalThis.personaje, // Ruta de la imagen
                 imageWidth: 100, // Ancho de la imagen
                 imageHeight: 100, // Alto de la imagen
                 imageAlt: 'Exclamación', // Texto alternativo

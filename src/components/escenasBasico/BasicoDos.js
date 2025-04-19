@@ -7,10 +7,6 @@ class BasicoDos extends Phaser.Scene {
         super({ key: 'BasicoDos' });
     }
     preload(){
-        this.load.image('fondoBasicoDos', './assets/Pasillo.png');
-        this.load.image('flecha', './assets/flecha.png');
-        this.load.image('informacion', './assets/Exclamacion.png');
-
     }
     create(){
         this.cameras.main.fadeIn(500, 0, 0, 0);
@@ -109,10 +105,10 @@ class BasicoDos extends Phaser.Scene {
                     `
                   },
                 title: '¡Debo ir a la oficina de seguridad!',
-                text: 'Ahí debe estar la computadora.¡Necesito darme prisa!',
+                html: `<p>Ahí debe estar la computadora.¡Necesito darme prisa!</p>`,
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false,
-                imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                imageUrl: globalThis.personaje, // Ruta de la imagen
                 imageWidth: 100, // Ancho de la imagen
                 imageHeight: 100, // Alto de la imagen
                 imageAlt: 'Exclamación', // Texto alternativo

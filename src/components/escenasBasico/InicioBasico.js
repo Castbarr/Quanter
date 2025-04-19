@@ -7,18 +7,15 @@ class InicioBasico extends Phaser.Scene {
         super({ key: 'InicioBasico' });
     }
     preload(){
-        this.load.image('fondoPuerta', './assets/PuertaBasico.png');
-        this.load.image('flecha', './assets/flecha.png');
-        this.load.image('informacion', './assets/Exclamacion.png');
-        this.load.image('libro', './assets/Libro.png');
     }
     create(){
         this.cameras.main.fadeIn(500, 0, 0, 0);
         this.add.image(500, 300, 'fondoPuerta');
         mostrarPuntos(this); // Mostrar puntos en la escena
         const puntos = this.registry.get('puntos');
+        if(puntos === 0) {
         this.registry.set('puntos', puntos +10);
-
+        }
 
         const informacion = this.add.image(503, 260, 'informacion').setInteractive();
         informacion.setAlpha(.1);
@@ -43,13 +40,13 @@ class InicioBasico extends Phaser.Scene {
         informacion.on('pointerdown', () => {
             informacion.setVisible(false); // Ocultar el cuadro de información
             Swal.fire({
-                showClass: {
+                  showClass:{
                     popup: `
-                      animate__animated
-                      animate__fadeInUp
-                      animate__faster
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
                     `
-                  },
+                    },
                   hideClass: {
                     popup: `
                       animate__animated
@@ -58,13 +55,16 @@ class InicioBasico extends Phaser.Scene {
                     `
                   },
                  title: '¡Estoy atrapado!',
-                 text: 'Tengo que encontrar la computadora de seguridad.¡Es mi unica oportunidad!',
+                 html:`
+                 <p>Tengo que encontrar la computadora de seguridad.¡Es mi unica oportunidad!</p>
+                 `,
                  confirmButtonText: 'Continuar',
                  allowOutsideClick: false,
-                 imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                 imageUrl: globalThis.personaje, // Ruta de la imagen
                  imageWidth: 100, // Ancho de la imagen
                  imageHeight: 100, // Alto de la imagen
                  imageAlt: 'Exclamación', // Texto alternativo
+                       
              }).then((result) => {
                  if (result.isConfirmed) {
                      libro.setVisible(true);
@@ -137,8 +137,8 @@ class InicioBasico extends Phaser.Scene {
                     `
                   },
                  title: '¿Qué es una computadora?',
-                 text: 'Una computadora es una máquina electrónica que procesa información y ejecuta tareas según instrucciones.\
-                 Es esencialmente un cerebro digital que ayuda en el trabajo, el entretenimiento y la comunicación.',
+                 html:`<p>Una computadora es una máquina electrónica que procesa información y ejecuta tareas según instrucciones.
+                 Es esencialmente un cerebro digital que ayuda en el trabajo, el entretenimiento y la comunicación.</p>`,
                  confirmButtonText: 'Continuar',
                  allowOutsideClick: false,
                  background: 'transparent url(./assets/Pergamino.png)',

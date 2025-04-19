@@ -8,12 +8,6 @@ class BasicoCinco extends Phaser.Scene {
         super({ key: 'BasicoCinco' });
     }
     preload() {
-        this.load.image('computadoraSeguridad', './assets/ComputadoraFrente.png');
-        this.load.image('libro', './assets/Libro.png');
-        this.load.image('flecha', './assets/flecha.png');
-        this.load.image('informacion', './assets/Exclamacion.png');
-        this.load.image('pregunta', './assets/Globo.png');
-        this.load.json('respuestas', './assets/respuestas.json'); // Cargar el archivo JSON
     }
 
     create() {
@@ -150,13 +144,13 @@ class BasicoCinco extends Phaser.Scene {
                 `
                   },
                 title: '¡La carpeta de seguridad!',
-                text: 'Esta protegida.¡Veamos!',
+                html: `<p>Esta protegida.¡Veamos!</p>`,
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false,
-                imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                imageUrl: globalThis.personaje, // Ruta de la imagen
                 imageWidth: 100, // Ancho de la imagen
                 imageHeight: 100, // Alto de la imagen
-                imageAlt: 'Exclamación', // Texto alternativo
+                imageAlt: 'personaje', // Texto alternativo
                 }).then((result) => {
                     if (result.isConfirmed) {
                         //pregunta.setVisible(true);
@@ -209,7 +203,7 @@ class BasicoCinco extends Phaser.Scene {
                     animate__faster
                 `
                     },
-            text: '¡Seleciona una respuesta!',
+            html: `<p>¡Seleciona una respuesta!</p>`,
             input: 'radio',
             allowOutsideClick: false,
             imageUrl: './assets/MonitorCarpeta.png', // Ruta de la imagen
@@ -229,8 +223,21 @@ class BasicoCinco extends Phaser.Scene {
                 const puntos = this.registry.get('puntos');
                 if (respuestaSeleccionada !== respuestaCorrecta) {
                 pregunta.setVisible(true);  
-                Swal.fire('Incorrecto', `Puntos restantes: ${puntos - 1}`, 'error');
-                this.registry.set('puntos', puntos - 1);
+                Swal.fire({
+                    title: '¡Incorrecto!',
+                    html: `<p>Puntos restantes: ${puntos - 1}</p>`,
+                    imageUrl: './assets/mano.gif', // Ruta de la imagen
+                    imageWidth: 100, // Ancho de la imagen
+                    imageHeight: 100, // Alto de la imagen
+                    imageAlt: 'personaje', // Texto alternativo
+                    confirmButtonText: 'Intentar de nuevo',
+                    allowOutsideClick: false,
+                });
+                    this.registry.set('puntos', puntos - 1); // Restar un punto
+                    if (puntos === 1) {
+                        Swal.close(); // Cerrar el modal de incorrecto
+                        this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                    }
                 } else {
                     Swal.fire({
                     showClass: {
@@ -247,10 +254,10 @@ class BasicoCinco extends Phaser.Scene {
                     `
                         },
                     title: '¡Desbloqueada!',
-                    text: 'Veamos que dice.',
+                    html: `<p>Veamos que dice.</p>`,
                     confirmButtonText: 'Continuar',
                     allowOutsideClick: false,
-                    imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                    imageUrl: globalThis.personaje, // Ruta de la imagen
                     imageWidth: 100, // Ancho de la imagen
                     imageHeight: 100, // Alto de la imagen
                     imageAlt: 'Exclamación', // Texto alternativo
@@ -301,10 +308,10 @@ class BasicoCinco extends Phaser.Scene {
                                     `
                                         },
                                     title: '¡Perfecto!',
-                                    text: 'Vayamos al almacen.',
+                                    html: `<p>Vayamos al almacen.</p>`,
                                     confirmButtonText: 'Continuar',
                                     allowOutsideClick: false,
-                                    imageUrl: './assets/Personaje.png', // Ruta de la imagen
+                                    imageUrl:globalThis.personaje, // Ruta de la imagen
                                     imageWidth: 100, // Ancho de la imagen
                                     imageHeight: 100, // Alto de la imagen
                                     imageAlt: 'Exclamación', // Texto alternativo
