@@ -277,9 +277,8 @@ class BasicoCinco extends Phaser.Scene {
                                     animate__faster
                                 `
                                     },
-                            html:  `
-                            <h5 style="margin:0; padding:0"><strong>Protocolo de seguridad</strong></h5>
-                            <br>
+                            title: 'Protocolo de seguridad',
+                            html:`
                             <h6 style="margin:0; padding:0; text-align: left"><strong>Sobre la computadora de seguridad:</strong></h6>
                             <p style="margin:0; padding:0; text-align: left">La computadora de seguridad se encuentra en el área del almacén. 
                                La seguridad de nuestras instalaciones es primordial, por ello tomamos la decisión de retirar de ella sus 
