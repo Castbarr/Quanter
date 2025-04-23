@@ -34,3 +34,18 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.swal2-confirm {
+  box-shadow: 0 0 0 3px #7c6c88 !important;
+  outline: none !important;
+  transition: box-shadow 0.2s;
+}
+
+
+canvas{
+  position: absolute !important;
+}
+
+
+
+

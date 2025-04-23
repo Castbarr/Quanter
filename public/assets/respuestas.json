@@ -64,5 +64,20 @@
         "El disco duro y los audífonos.",
         "El micrófono y el disco duro."
         
+    ],
+    "respuestasCorrectasCuatro":[
+        "La parte física de la computadora."
+    ],
+    "respuestasIncorrectasCuatro":[
+        "Es lo mismo que el software.",
+        "Son los programas de la computadora.",
+        "Es solo información almacenada.",
+        "Es la conexión inalámbrica entre dispositivos.",
+        "Son los algoritmos que procesan datos.",
+        "Es la parte virtual de un sistema.",
+        "Son las aplicaciones como Word o Chrome.",
+        "Es sinónimo de Internet.",
+        "Permite que los dispositivos funcionen sin electricidad.",
+        "Es cualquier código de programación."
     ]
 }

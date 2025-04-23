@@ -27,7 +27,7 @@ class BasicoTres extends Phaser.Scene{
         flecha.angle = -90;
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');
@@ -55,15 +55,15 @@ class BasicoTres extends Phaser.Scene{
             'c': grupoRespuestas[2],
         };
         const pregunta = this.add.image(550, 250, 'pregunta').setInteractive();
-        pregunta.setScale(0.8);
+        pregunta.setScale(0.7);
         pregunta.setVisible(false);
         pregunta.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            pregunta.setScale(0.9); // Aumentar tamaño al pasar el ratón
+            pregunta.setScale(0.8); // Aumentar tamaño al pasar el ratón
         });
         pregunta.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            pregunta.setScale(0.8); // Volver al tamaño original 
+            pregunta.setScale(0.7); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: pregunta,
@@ -104,8 +104,6 @@ class BasicoTres extends Phaser.Scene{
                   const respuestaSeleccionada = opciones[respuesta]; // Obtener la respuesta seleccionada
                   const puntos = this.registry.get('puntos');
                   if (respuestaSeleccionada !== respuestaCorrecta) {
-                    console.log(respuestaIncorrecta, respuestaIncorrectaDos);
-                    console.log(respuestaSeleccionada);
                     pregunta.setVisible(true);  
                     Swal.fire({
                         title: '¡Incorrecto!',
@@ -139,18 +137,21 @@ class BasicoTres extends Phaser.Scene{
                         `
                           },
                         title: '¡Perfecto!',
-                        html: `<p>Logre entrar. ¡A buscar la computadora!</p>`,
+                        html: `<p>Desbloqueada. ¡Entremos!</p>`,
                         confirmButtonText: 'Continuar',
                         allowOutsideClick: false,
                         imageUrl: globalThis.personaje,
                         imageWidth: 100, // Ancho de la imagen
                         imageHeight: 100, // Alto de la imagen
                         imageAlt: 'Exclamación', // Texto alternativo
-                    });
-                    this.cameras.main.fadeOut(500, 0, 0, 0);
-                    this.cameras.main.once('camerafadeoutcomplete', () => {
-                    this.scene.start('BasicoCuatro'); // Cambia a la escena BasicoDos
-                    });
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                          this.cameras.main.fadeOut(500, 0, 0, 0);
+                          this.cameras.main.once('camerafadeoutcomplete', () => {
+                            this.scene.start('BasicoCuatro'); // Cambia a la escena BasicoDos
+                          });
+                        }
+                      });
                   }
                 }
               });
@@ -159,16 +160,16 @@ class BasicoTres extends Phaser.Scene{
 
 
         const informacion = this.add.image(450, 300, 'informacion').setInteractive();
-        informacion.setScale(0.4);
+        informacion.setScale(0.3);
         informacion.setAlpha(.1);
         informacion.setVisible(true); 
         informacion.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            informacion.setScale(0.5); // Aumentar tamaño al pasar el ratón
+            informacion.setScale(0.4); // Aumentar tamaño al pasar el ratón
         });
         informacion.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            informacion.setScale(0.4); // Volver al tamaño original 
+            informacion.setScale(0.3); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: informacion,
@@ -195,7 +196,7 @@ class BasicoTres extends Phaser.Scene{
                         animate__faster
                 `
                   },
-                title: '¡Puerta bloqueda!',
+                title: '¡Puerta bloqueada!',
                 html: `<p>Necesito responder correctamente la pregunta de seguridad.¡Si no la resuelvo no podré ingresar!</p>`,
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false,

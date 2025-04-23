@@ -2,17 +2,18 @@ import Phaser from "phaser";
 import { mostrarPuntos } from "../Puntos";
 import Swal from "sweetalert2";
 
-class BasicoOcho extends Phaser.Scene {
+class BasicoDiez extends Phaser.Scene {
     constructor() {
-        super({ key: "BasicoOcho" });
-    }   
+        super({ key: "BasicoDiez" });
+    }
     preload() {
     }
-
-    create() {
+    create(){
         this.cameras.main.fadeIn(500, 0, 0, 0);
-        this.add.image(500, 300, "puertaAlmacen");
+        this.add.image(500, 300, "almacenDesenfocado");
+        this.add.image(500, 300, "tarjetaMadreCaja");
         mostrarPuntos(this);
+
 
         const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
         const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasCuatro);  ; // Obtener la respuesta correcta del JSON
@@ -21,13 +22,14 @@ class BasicoOcho extends Phaser.Scene {
         const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
         Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
 
-        const flecha = this.add.image(90, 300, 'flecha').setInteractive();
+
+        const flecha = this.add.image(40, 300, 'flecha').setInteractive();
         flecha.angle = -90; // Rotar la flecha 45 grados
         flecha.setScale(0.2); // Cambiar el tamaño de la flecha
         flecha.setVisible(true);
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.25); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');
@@ -44,64 +46,9 @@ class BasicoOcho extends Phaser.Scene {
         flecha.on('pointerdown', () => {
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
-            this.scene.start('BasicoSiete'); // Cambia a la escena BasicoDos
+            this.scene.start('BasicoNueve'); // Cambia a la escena BasicoDos
             });
         });
-
-
-
-        const informacion = this.add.image(508, 250, 'informacion').setInteractive();
-        informacion.setScale(0.3);
-        informacion.setAlpha(.1);
-        informacion.setVisible(true); 
-        informacion.on('pointerover', () => {
-            this.input.setDefaultCursor('pointer');
-            informacion.setScale(0.4); // Aumentar tamaño al pasar el ratón
-        });
-        informacion.on('pointerout', () => {
-            this.input.setDefaultCursor('default');
-            informacion.setScale(0.3); // Volver al tamaño original 
-        });
-        this.tweens.add({
-            targets: informacion,
-            alpha: .3,           // Aparece
-            duration: 1000,      
-            ease: 'Sine.easeInOut',
-            yoyo: true,         // Regresa a su tamaño original
-            repeat: -1          // Infinito
-        });
-        informacion.on('pointerdown', () => {
-            informacion.setVisible(false); // Ocultar el cuadro de información
-            Swal.fire({
-                showClass: {
-                    popup: `
-                      animate__animated
-                      animate__fadeInUp
-                      animate__faster
-                    `
-                  },
-                hideClass: {
-                popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                `
-                  },
-                title: '¡Bloqueada!',
-                html: `<p>Todas las puertas estan protegidas con preguntas de seguridad.¡Ni hablar!</p>`,
-                confirmButtonText: 'Continuar',
-                allowOutsideClick: false,
-                imageUrl: globalThis.personaje, // Ruta de la imagen
-                imageWidth: 100, // Ancho de la imagen
-                imageHeight: 100, // Alto de la imagen
-                imageAlt: 'personaje', // Texto alternativo
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        pregunta.setVisible(true); // Mostrar la pregunta al hacer clic en el cuadro de información
-                    }
-                }) 
-        });
-
 
 
        const opciones = {
@@ -109,9 +56,9 @@ class BasicoOcho extends Phaser.Scene {
             'b': grupoRespuestas[1],
             'c': grupoRespuestas[2],
         };
-        const pregunta = this.add.image(550, 250, 'pregunta').setInteractive();
+        const pregunta = this.add.image(500, 300, 'pregunta').setInteractive();
         pregunta.setScale(0.7);
-        pregunta.setVisible(false);
+        pregunta.setVisible(true);
         pregunta.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             pregunta.setScale(0.8); // Aumentar tamaño al pasar el ratón
@@ -179,27 +126,26 @@ class BasicoOcho extends Phaser.Scene {
                   }
                 } else {
                  Swal.fire({
-                  showClass: {
+                 showClass: {
                     popup: `
-                      animate__animated
-                      animate__fadeInUp
-                      animate__faster
+                        animate__animated
+                        animate__zoomIn
+                        animate__faster  `
+                    },
+                 hideClass: {
+                    popup: `
+                        animate__animated
+                        animate__zoomOut
+                        animate__faster
                     `
-                    },
-                  hideClass: {
-                    popup: `
-                      animate__animated
-                      animate__fadeOutDown
-                      animate__faster
-                  `
-                    },
-                  title: '¡Excelente!',
-                  html: `<p>Puerta desbloqueada. ¡Vayamos dentro!</p>`,
+                        },
+                  title: '¡Muy Bien!',
+                  html: `<p>Codigo desbloquado, tenemos la placa base. ¡Busquemos el resto de componentes!</p>`,
                   confirmButtonText: 'Continuar',
                   allowOutsideClick: false,
-                  imageUrl: globalThis.personaje, // Ruta de la imagen
-                  imageWidth: 100, // Ancho de la imagen
-                  imageHeight: 100, // Alto de la imagen
+                  imageUrl:'assets/TarjetaMadre.png', // Ruta de la imagen;
+                  imageWidth: 200, // Ancho de la imagen
+                  imageHeight: 115, // Alto de la imagen
                   imageAlt: 'Exclamación', // Texto alternativo
                 }).then((result) => {
                   if (result.isConfirmed) {
@@ -217,5 +163,8 @@ class BasicoOcho extends Phaser.Scene {
 
 
     }
+
+
+
 }
-export default BasicoOcho;
+export default BasicoDiez;

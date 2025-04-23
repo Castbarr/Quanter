@@ -10,9 +10,36 @@ class BasicoCuatro extends Phaser.Scene {
     }
 
     create(){
-        this.cameras.main.fadeIn(500, 0, 0, 0);
+        
         this.add.image(500, 300, 'oficinaSeguridadInterna');
         mostrarPuntos(this);
+
+
+        this.cameras.main.fadeIn(500, 0, 0, 0);
+        this.time.delayedCall(1000, () => {
+        const cam = this.cameras.main;
+        const originalX = cam.midPoint.x;
+        const originalY = cam.midPoint.y;
+        const originalZoom = cam.zoom;
+        // 2. Pan + Zoom hacia la zona objetivo
+        const zoomLevel = 2;
+        const duration = 3000;
+        cam.pan(200, 300, duration, 'Power2');
+        cam.zoomTo(zoomLevel, duration, 'Power2');
+        // 3. Luego de terminar el zoom, volver atrás
+        cam.once('camerazoomcomplete', () => {
+            cam.pan(700, 300, duration, 'Power2');
+            cam.once('camerapancomplete', () => {
+            this.time.delayedCall(100, () => {
+                cam.pan(originalX, originalY, duration, 'Power2');
+                cam.zoomTo(originalZoom, duration, 'Power2');
+                flecha.setVisible(true); 
+                informacion.setVisible(true); 
+            });
+        });
+        });
+        });
+
 
         const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
         const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasDos);  ; // Obtener la respuesta correcta del JSON
@@ -27,7 +54,7 @@ class BasicoCuatro extends Phaser.Scene {
         flecha.setVisible(false); // Ocultar la flecha inicialmente
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');
@@ -51,16 +78,16 @@ class BasicoCuatro extends Phaser.Scene {
 
 
         const informacion = this.add.image(665, 420, 'informacion').setInteractive();
-                informacion.setScale(0.4);
+                informacion.setScale(0.3);
                 informacion.setAlpha(.1);
-                informacion.setVisible(true); 
+                informacion.setVisible(false); 
                 informacion.on('pointerover', () => {
                     this.input.setDefaultCursor('pointer');
-                    informacion.setScale(0.5); // Aumentar tamaño al pasar el ratón
+                    informacion.setScale(0.4); // Aumentar tamaño al pasar el ratón
                 });
                 informacion.on('pointerout', () => {
                     this.input.setDefaultCursor('default');
-                    informacion.setScale(0.4); // Volver al tamaño original 
+                    informacion.setScale(0.3); // Volver al tamaño original 
                 });
                 this.tweens.add({
                     targets: informacion,
@@ -111,15 +138,15 @@ class BasicoCuatro extends Phaser.Scene {
             'c': grupoRespuestas[2],
         };                        
         const pregunta = this.add.image(750, 350, 'pregunta').setInteractive();
-            pregunta.setScale(0.8);
+            pregunta.setScale(0.7);
             pregunta.setVisible(false);
             pregunta.on('pointerover', () => {
                 this.input.setDefaultCursor('pointer');
-                pregunta.setScale(0.9); // Aumentar tamaño al pasar el ratón
+                pregunta.setScale(0.8); // Aumentar tamaño al pasar el ratón
             });
             pregunta.on('pointerout', () => {
                 this.input.setDefaultCursor('default');
-                pregunta.setScale(0.8); // Volver al tamaño original 
+                pregunta.setScale(0.7); // Volver al tamaño original 
             });
             this.tweens.add({
                 targets: pregunta,
@@ -217,15 +244,15 @@ class BasicoCuatro extends Phaser.Scene {
 
 
         const libro = this.add.image(890, 100, 'libro').setInteractive();
-        libro.setScale(0.3); // Cambiar el tamaño del libro
+        libro.setScale(0.2); // Cambiar el tamaño del libro
         libro.setVisible(false);
         libro.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            libro.setScale(0.4); // Aumentar tamaño al pasar el ratón
+            libro.setScale(0.3); // Aumentar tamaño al pasar el ratón
         });
         libro.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            libro.setScale(0.3); // Volver al tamaño original 
+            libro.setScale(0.2); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: libro,

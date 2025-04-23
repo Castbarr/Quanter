@@ -20,7 +20,7 @@ class BasicoSiete extends Phaser.Scene {
         flecha.setVisible(false);
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');
@@ -100,7 +100,7 @@ class BasicoSiete extends Phaser.Scene {
         flechaDos.angle = -90; 
         flechaDos.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flechaDos.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flechaDos.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flechaDos.on('pointerout', () => {
             this.input.setDefaultCursor('default');

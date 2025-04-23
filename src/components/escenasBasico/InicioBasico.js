@@ -10,6 +10,19 @@ class InicioBasico extends Phaser.Scene {
     }
     create(){
         this.cameras.main.fadeIn(500, 0, 0, 0);
+        this.time.delayedCall(1000, () => {
+        const cam = this.cameras.main;
+        cam.setBounds(0, 0, 1000, 600);
+        cam.setZoom(1);
+        // Zoom automático al entrar en la escena
+        cam.zoomTo(2, 1000); // Zoom in
+        cam.pan(500, 300, 1000, 'Power2');
+        this.time.delayedCall(2000, function () {
+            cam.zoomTo(1, 1000); // Zoom out
+            informacion.setVisible(true);
+        });
+        });
+
         this.add.image(500, 300, 'fondoPuerta');
         mostrarPuntos(this); // Mostrar puntos en la escena
         const puntos = this.registry.get('puntos');
@@ -19,15 +32,15 @@ class InicioBasico extends Phaser.Scene {
 
         const informacion = this.add.image(503, 260, 'informacion').setInteractive();
         informacion.setAlpha(.1);
-        informacion.setScale(0.5); // Cambiar el tamaño del cuadro
-        informacion.setVisible(true);
+        informacion.setScale(0.3); // Cambiar el tamaño del cuadro
+        informacion.setVisible(false);
         informacion.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            informacion.setScale(0.6); // Aumentar tamaño al pasar el ratón
+            informacion.setScale(0.4); // Aumentar tamaño al pasar el ratón
         });
         informacion.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            informacion.setScale(0.5); // Volver al tamaño original 
+            informacion.setScale(0.3); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: informacion,
@@ -79,7 +92,7 @@ class InicioBasico extends Phaser.Scene {
         flecha.setVisible(false);
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');

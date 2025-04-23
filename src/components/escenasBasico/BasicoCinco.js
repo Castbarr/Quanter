@@ -29,7 +29,7 @@ class BasicoCinco extends Phaser.Scene {
         flecha.angle = -90;
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');
@@ -107,16 +107,16 @@ class BasicoCinco extends Phaser.Scene {
 
 
         const informacion = this.add.image(530, 230, 'informacion').setInteractive();
-        informacion.setScale(0.4);
+        informacion.setScale(0.3);
         informacion.setAlpha(.1);
         informacion.setVisible(true); 
         informacion.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            informacion.setScale(0.5); // Aumentar tamaño al pasar el ratón
+            informacion.setScale(0.4); // Aumentar tamaño al pasar el ratón
         });
         informacion.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            informacion.setScale(0.4); // Volver al tamaño original 
+            informacion.setScale(0.3); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: informacion,
@@ -169,15 +169,15 @@ class BasicoCinco extends Phaser.Scene {
             'c': grupoRespuestas[2],
         };                        
         const pregunta = this.add.image(750, 100, 'pregunta').setInteractive();
-        pregunta.setScale(0.8);
+        pregunta.setScale(0.7);
         pregunta.setVisible(false);
         pregunta.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            pregunta.setScale(0.9); // Aumentar tamaño al pasar el ratón
+            pregunta.setScale(0.8); // Aumentar tamaño al pasar el ratón
         });
         pregunta.on('pointerout', () => {
             this.input.setDefaultCursor('default');
-            pregunta.setScale(0.8); // Volver al tamaño original 
+            pregunta.setScale(0.7); // Volver al tamaño original 
         });
         this.tweens.add({
             targets: pregunta,
@@ -335,7 +335,7 @@ class BasicoCinco extends Phaser.Scene {
         flechaDos.setVisible(false);
         flechaDos.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flechaDos.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flechaDos.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flechaDos.on('pointerout', () => {
             this.input.setDefaultCursor('default');

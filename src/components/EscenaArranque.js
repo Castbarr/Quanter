@@ -27,6 +27,15 @@ export default class EscenaArranque extends Phaser.Scene {
       this.load.image("puertaAlmacen", "./assets/PuertaAlmacen.png");
       this.load.image("almacen", "./assets/Almacen.png");
       this.load.image("mano", "./assets/mano.gif");
+      this.load.image("discoCaja", "./assets/DiscoCaja.png");
+      this.load.image("fuentePoderCaja", "./assets/FuentePoderCaja.png");
+      this.load.image("memoriaCaja", "./assets/MemoriaCaja.png");
+      this.load.image("procesadorCaja", "./assets/ProcesadorCaja.png");
+      this.load.image("refrigeracionCaja", "./assets/RefrigeracionCaja.png");
+      this.load.image("tarjetaGraficaCaja", "./assets/TarjetaGraficaCaja.png");
+      this.load.image("tarjetaMadreCaja", "./assets/TarjetaMadreCaja.png");
+      this.load.image("almacenMonitorApagado", "./assets/AlmacenMonitorApagado.png");
+      this.load.image("almacenDesenfocado", "./assets/AlmacenDesenfocado.png");
       this.load.json('respuestas', './assets/respuestas.json');
     }
   

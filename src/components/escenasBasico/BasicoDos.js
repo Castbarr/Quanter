@@ -18,7 +18,7 @@ class BasicoDos extends Phaser.Scene {
         flecha.angle = -90;
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');
@@ -45,7 +45,7 @@ class BasicoDos extends Phaser.Scene {
         flechaDos.setVisible(false);
         flechaDos.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flechaDos.setScale(0.3); // Aumentar tamaño al pasar el ratón
+            flechaDos.setScale(0.25); // Aumentar tamaño al pasar el ratón
         });
         flechaDos.on('pointerout', () => {
             this.input.setDefaultCursor('default');
