@@ -16,9 +16,12 @@ class BasicoDiez extends Phaser.Scene {
 
 
         const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
-        const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasCuatro);  ; // Obtener la respuesta correcta del JSON
-        const respuestaIncorrecta = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasCuatro); // Obtener la respuesta incorrecta del JSON
-        const respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasCuatro); // Obtener la respuesta incorrecta del JSON
+        const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasCinco);  ; // Obtener la respuesta correcta del JSON
+        const respuestaIncorrecta = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasCinco); // Obtener la respuesta incorrecta del JSON
+        let respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasCinco); // Obtener la respuesta incorrecta del JSON
+        while (respuestaIncorrecta === respuestaIncorrectaDos) {
+                    respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasCinco); // Obtener la respuesta incorrecta del JSON
+                }
         const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
         Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
 
@@ -91,7 +94,7 @@ class BasicoDiez extends Phaser.Scene {
                   animate__faster
                 `
                   },
-              title: '¿Qué es Hardware?',
+              html: `<h5><strong>Selecciona la afirmación correcta sobre la placa base:</strong></h5>`,
               input: 'radio',
               allowOutsideClick: false,
               inputOptions: opciones,
@@ -151,7 +154,7 @@ class BasicoDiez extends Phaser.Scene {
                   if (result.isConfirmed) {
                     this.cameras.main.fadeOut(500, 0, 0, 0);
                     this.cameras.main.once('camerafadeoutcomplete', () => {
-                      this.scene.start('BasicoNueve'); // Cambia a la escena BasicoDos
+                      this.scene.start('BasicoOnce'); // Cambia a la escena BasicoDos
                     });
                   }
                 });
@@ -160,6 +163,58 @@ class BasicoDiez extends Phaser.Scene {
               });
               
             });
+
+
+        const libro = this.add.image(890, 100, 'libro').setInteractive();
+        libro.setScale(0.2); // Cambiar el tamaño del libro
+        libro.setVisible(true);
+        libro.on('pointerover', () => {
+            this.input.setDefaultCursor('pointer');
+            libro.setScale(0.3); // Aumentar tamaño al pasar el ratón
+        });
+        libro.on('pointerout', () => {
+            this.input.setDefaultCursor('default');
+            libro.setScale(0.2); // Volver al tamaño original 
+        });
+        this.tweens.add({
+            targets: libro,
+            alpha: .2,           // Aparece
+            duration: 1000,      
+            ease: 'Sine.easeInOut',
+            yoyo: true,         // Regresa a su tamaño original
+            repeat: -1          // Infinito
+        });
+        libro.on('pointerdown', () => {
+            Swal.fire({
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeInTopRight
+                      animate__faster  `
+                  },
+                  hideClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeOutTopRight
+                      animate__faster
+                    `
+                  },
+                 title: 'La placa base',
+                 html:`<p>La placa base, también llamada motherboard o tarjeta madre, es como el corazón de una computadora.
+                 Es una gran tarjeta donde se conectan y comunican todos los componentes importantes: el procesador,
+                 la memoria RAM, el disco duro, la tarjeta gráfica y más. Además, distribuye la energía y permite que todo funcione en conjunto.
+                 Sin ella, los demás componentes no podrían trabajar coordinados.</p>`,
+                 confirmButtonText: 'Continuar',
+                 allowOutsideClick: false,
+                 background: 'transparent url(./assets/Pergamino.png)',
+             }).then((result) => {
+                if (result.isConfirmed) {
+                    // Acciones al confirmar el libro
+                }
+            }) 
+         });
+
+
 
 
     }

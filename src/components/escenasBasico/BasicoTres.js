@@ -17,7 +17,10 @@ class BasicoTres extends Phaser.Scene{
         const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
         const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasUno);  ; // Obtener la respuesta correcta del JSON
         const respuestaIncorrecta = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasUno); // Obtener la respuesta incorrecta del JSON
-        const respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasUno); // Obtener la respuesta incorrecta del JSON
+        let respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasUno); // Obtener la respuesta incorrecta del JSON
+        while (respuestaIncorrecta === respuestaIncorrectaDos) {
+                    respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasUno); // Obtener la respuesta incorrecta del JSON
+                }
         const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
         Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
 

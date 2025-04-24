@@ -79,5 +79,101 @@
         "Es sinónimo de Internet.",
         "Permite que los dispositivos funcionen sin electricidad.",
         "Es cualquier código de programación."
+    ],
+    "respuestasCorrectasCinco":[
+        "Es una tarjeta donde se conectan los componentes principales del computador.",
+        "Permite que el procesador, la RAM y otros dispositivos trabajen juntos.",
+        "Es esencial para el funcionamiento del equipo.",
+        "También se le conoce como tarjeta madre o motherboard.",
+        "Distribuye la energía a los distintos componentes.",
+        "Conecta partes como el disco duro, la tarjeta gráfica y la memoria RAM.",
+        "Sin ella, los componentes no podrían comunicarse.",
+        "Es como el corazón del sistema.",
+        "Actúa como centro de control y conexión.",
+        "Es una parte física fundamental en el interior del gabinete."
+    ],
+    "respuestasIncorrectasCinco":[
+        "Es el componente que almacena toda la información del usuario.",
+        "La placa base procesa directamente todos los datos sin ayuda del procesador.",
+        "Es la parte que hace que los gráficos se vean en la pantalla.",
+        "Se encarga de convertir la corriente eléctrica para toda la casa.",
+        "Es la memoria principal del sistema.",
+        "Es un software que controla los programas.",
+        "Sirve para mejorar automáticamente el rendimiento de internet.",
+        "Es el lugar donde se guardan los juegos y aplicaciones.",
+        "La placa base tiene su propio sistema operativo.",
+        "Funciona sin necesidad de otros componentes."
+    ],
+    "respuestasCorrectasSeis":[
+        "Es el cerebro de la computadora.",
+        "Ejecuta instrucciones de los programas.",
+        "Realiza cálculos para que todo funcione bien.",
+        "Coordina las tareas del sistema.",
+        "Sin él, la computadora no puede operar.",
+        "Interpreta lo que el usuario quiere hacer.",
+        "Es fundamental para abrir y usar aplicaciones.",
+        "Trabaja constantemente mientras usas el equipo.",
+        "Es una de las piezas más importantes.",
+        "Está dentro de la placa base."
+    ],
+    "respuestasIncorrectasSeis":[
+        "Es la parte que muestra imágenes en la pantalla.",
+        "Almacena todos los archivos del usuario.",
+        "Es la memoria principal del sistema.",
+        "Controla directamente el internet.",
+        "Es el componente que emite el sonido.",
+        "Funciona igual que la tarjeta gráfica.",
+        "Tiene un ventilador que mejora la velocidad del WiFi.",
+        "Es solo un chip decorativo dentro del gabinete.",
+        "No es necesario si la computadora tiene mucha RAM.",
+        "Solo sirve para jugar videojuegos."
+    ],
+    "respuestasCorrectasSiete":[
+        "Es la memoria donde se cargan los programas que estás usando.",
+        "Es un espacio de trabajo temporal para el procesador.",
+        "Permite que el sistema funcione más rápido mientras se usa.",
+        "Guarda datos solo mientras la computadora está encendida.",
+        "Es mucho más rápida que el disco duro.",
+        "Ayuda a que se puedan usar varios programas a la vez.",
+        "Pierde su contenido al apagar el equipo.",
+        "Es clave para el buen rendimiento del sistema.",
+        "Almacena información de uso inmediato.",
+        "Es una memoria volátil de alta velocidad."
+    ],
+    "respuestasIncorrectasSiete":[
+        "Es la memoria que guarda todos tus archivos permanentemente.",
+        "Es un tipo de almacenamiento igual que un disco duro.",
+        "Es el componente que acelera la conexión a internet.",
+        "Almacena la información incluso cuando la computadora está apagada.",
+        "Es la parte de la computadora que mejora la calidad de imagen.",
+        "Es una memoria externa que se conecta por USB.",
+        "Es responsable de encender la computadora.",
+        "Es una parte del procesador.",
+        "Está ubicada dentro del monitor.",
+        "Solo sirve cuando juegas videojuegos."
+    ],
+    "respuestasCorrectasOcho":[
+        "Es el componente que genera las imágenes que ves en la pantalla.",
+        "Procesa los gráficos de juegos, videos y programas.",
+        "Se encarga de mostrar imágenes con buena calidad.",
+        "Puede estar integrada o ser una tarjeta dedicada.",
+        "Ayuda a que los videos y juegos se vean fluidos.",
+        "Es esencial para tareas de diseño y edición de imagen.",
+        "Trabaja junto al monitor para mostrar los gráficos.",
+        "Mejora el rendimiento visual del sistema.",
+        "Es conocida también como GPU.",
+        "Convierte datos en imágenes visibles para el usuario."
+    ],
+    "respuestasIncorrectasOcho":[
+        "Es la parte que guarda todas las fotos y videos del usuario.",
+        "Es la memoria principal del sistema.",
+        "Es la encargada de procesar el sonido.",
+        "Controla la velocidad del internet.",
+        "Es un tipo de procesador que reemplaza al CPU.",
+        "Es una memoria RAM especializada en juegos.",
+        "Se encarga de enfriar el sistema mientras se usa.",
+        "Sirve solo para conectar más pantallas a la computadora.",
+        "Está ubicada dentro del monitor, no en la computadora.",
+        "Solo es útil cuando se usa una impresora."
     ]
 }

@@ -12,6 +12,13 @@ import BasicoSiete from './escenasBasico/BasicoSiete';
 import BasicoOcho from './escenasBasico/BasicoOcho';
 import BasicoNueve from './escenasBasico/BasicoNueve';
 import BasicoDiez from './escenasBasico/BasicoDiez';
+import BasicoOnce from './escenasBasico/BasicoOnce';
+import BasicoDoce from './escenasBasico/BasicoDoce';
+import BasicoTrece from './escenasBasico/BasicoTrece';
+import BasicoCatorce from './escenasBasico/BasicoCatorce';
+import BasicoQuince from './escenasBasico/BasicoQuince';
+import BasicoDieciseis from './escenasBasico/BasicoDieciseis';
+import BasicoDiecisiete from './escenasBasico/BasicoDiecisiete';
 
 
 const config = {
@@ -25,7 +32,8 @@ const config = {
   },
   scene: [
     EscenaArranque, Portada, MenuPrincipal, 
-    InicioBasico, BasicoDos, BasicoTres, BasicoCuatro, BasicoCinco, BasicoSeis, BasicoSiete, BasicoOcho, BasicoNueve, BasicoDiez
+    InicioBasico, BasicoDos, BasicoTres, BasicoCuatro, BasicoCinco, BasicoSeis, BasicoSiete, BasicoOcho, BasicoNueve, BasicoDiez,
+    BasicoOnce, BasicoDoce, BasicoTrece, BasicoCatorce, BasicoQuince, BasicoDieciseis, BasicoDiecisiete
   ]
 };
 

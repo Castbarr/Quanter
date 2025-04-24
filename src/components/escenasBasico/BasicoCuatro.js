@@ -23,7 +23,7 @@ class BasicoCuatro extends Phaser.Scene {
         const originalZoom = cam.zoom;
         // 2. Pan + Zoom hacia la zona objetivo
         const zoomLevel = 2;
-        const duration = 3000;
+        const duration = 2000;
         cam.pan(200, 300, duration, 'Power2');
         cam.zoomTo(zoomLevel, duration, 'Power2');
         // 3. Luego de terminar el zoom, volver atrás
@@ -44,7 +44,10 @@ class BasicoCuatro extends Phaser.Scene {
         const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
         const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasDos);  ; // Obtener la respuesta correcta del JSON
         const respuestaIncorrecta = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasDos); // Obtener la respuesta incorrecta del JSON
-        const respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasDos); // Obtener la respuesta incorrecta del JSON
+        let respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasDos); // Obtener la respuesta incorrecta del JSON
+        while (respuestaIncorrecta === respuestaIncorrectaDos) {
+                    respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasDos); // Obtener la respuesta incorrecta del JSON
+                }
         const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
         Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
 
@@ -172,7 +175,7 @@ class BasicoCuatro extends Phaser.Scene {
                             animate__faster
                         `
                             },
-                    text: '¡Seleciona una respuesta!',
+                    html: `<p>¡Seleciona una respuesta!</p>`,
                     input: 'radio',
                     allowOutsideClick: false,
                     imageUrl: './assets/MonitorSeguridad.png', // Ruta de la imagen

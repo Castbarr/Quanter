@@ -2,35 +2,37 @@ import Phaser from "phaser";
 import { mostrarPuntos } from "../Puntos";
 import Swal from "sweetalert2";
 
-class BasicoOcho extends Phaser.Scene {
+class BasicoDieciseis extends Phaser.Scene {
     constructor() {
-        super({ key: "BasicoOcho" });
-    }   
+        super({ key: "BasicoDieciseis" });
+    }
     preload() {
     }
-
-    create() {
+    create(){
         this.cameras.main.fadeIn(500, 0, 0, 0);
-        this.add.image(500, 300, "puertaAlmacen");
+        this.add.image(500, 300, "almacenDesenfocado");
+        this.add.image(500, 300, "tarjetaGraficaCaja");
         mostrarPuntos(this);
 
+
         const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
-        const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasCuatro);  ; // Obtener la respuesta correcta del JSON
-        const respuestaIncorrecta = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasCuatro); // Obtener la respuesta incorrecta del JSON
-        let respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasCuatro); // Obtener la respuesta incorrecta del JSON
+        const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasOcho); // Obtener la respuesta correcta del JSON
+        const respuestaIncorrecta = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasOcho); // Obtener la respuesta incorrecta del JSON
+        let respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasOcho); // Obtener la respuesta incorrecta del JSON
         while (respuestaIncorrecta === respuestaIncorrectaDos) {
-                    respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasCuatro); // Obtener la respuesta incorrecta del JSON
-                }
+            respuestaIncorrectaDos = Phaser.Math.RND.pick(respuestas.respuestasIncorrectasOcho); // Obtener la respuesta incorrecta del JSON
+        }
         const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
         Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
 
-        const flecha = this.add.image(90, 300, 'flecha').setInteractive();
+
+        const flecha = this.add.image(40, 300, 'flecha').setInteractive();
         flecha.angle = -90; // Rotar la flecha 45 grados
         flecha.setScale(0.2); // Cambiar el tamaño de la flecha
         flecha.setVisible(true);
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
-            flecha.setScale(0.25); // Aumentar tamaño al pasar el ratón
+            flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
         });
         flecha.on('pointerout', () => {
             this.input.setDefaultCursor('default');
@@ -47,64 +49,9 @@ class BasicoOcho extends Phaser.Scene {
         flecha.on('pointerdown', () => {
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
-            this.scene.start('BasicoSiete'); // Cambia a la escena BasicoDos
+            this.scene.start('BasicoQuince'); // Cambia a la escena BasicoDos
             });
         });
-
-
-
-        const informacion = this.add.image(508, 250, 'informacion').setInteractive();
-        informacion.setScale(0.3);
-        informacion.setAlpha(.1);
-        informacion.setVisible(true); 
-        informacion.on('pointerover', () => {
-            this.input.setDefaultCursor('pointer');
-            informacion.setScale(0.4); // Aumentar tamaño al pasar el ratón
-        });
-        informacion.on('pointerout', () => {
-            this.input.setDefaultCursor('default');
-            informacion.setScale(0.3); // Volver al tamaño original 
-        });
-        this.tweens.add({
-            targets: informacion,
-            alpha: .3,           // Aparece
-            duration: 1000,      
-            ease: 'Sine.easeInOut',
-            yoyo: true,         // Regresa a su tamaño original
-            repeat: -1          // Infinito
-        });
-        informacion.on('pointerdown', () => {
-            informacion.setVisible(false); // Ocultar el cuadro de información
-            Swal.fire({
-                showClass: {
-                    popup: `
-                      animate__animated
-                      animate__fadeInUp
-                      animate__faster
-                    `
-                  },
-                hideClass: {
-                popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                `
-                  },
-                title: '¡Bloqueada!',
-                html: `<p>Todas las puertas estan protegidas con preguntas de seguridad.¡Ni hablar!</p>`,
-                confirmButtonText: 'Continuar',
-                allowOutsideClick: false,
-                imageUrl: globalThis.personaje, // Ruta de la imagen
-                imageWidth: 100, // Ancho de la imagen
-                imageHeight: 100, // Alto de la imagen
-                imageAlt: 'personaje', // Texto alternativo
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        pregunta.setVisible(true); // Mostrar la pregunta al hacer clic en el cuadro de información
-                    }
-                }) 
-        });
-
 
 
        const opciones = {
@@ -112,9 +59,9 @@ class BasicoOcho extends Phaser.Scene {
             'b': grupoRespuestas[1],
             'c': grupoRespuestas[2],
         };
-        const pregunta = this.add.image(550, 250, 'pregunta').setInteractive();
+        const pregunta = this.add.image(500, 300, 'pregunta').setInteractive();
         pregunta.setScale(0.7);
-        pregunta.setVisible(false);
+        pregunta.setVisible(true);
         pregunta.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             pregunta.setScale(0.8); // Aumentar tamaño al pasar el ratón
@@ -147,7 +94,7 @@ class BasicoOcho extends Phaser.Scene {
                   animate__faster
                 `
                   },
-              title: '¿Qué es Hardware?',
+              html: `<h5><strong>¡Selecciona la afirmación correcta sobre la tarjeta gráfica!</strong></h5>`,
               input: 'radio',
               allowOutsideClick: false,
               inputOptions: opciones,
@@ -182,33 +129,32 @@ class BasicoOcho extends Phaser.Scene {
                   }
                 } else {
                  Swal.fire({
-                  showClass: {
+                 showClass: {
                     popup: `
-                      animate__animated
-                      animate__fadeInUp
-                      animate__faster
+                        animate__animated
+                        animate__zoomIn
+                        animate__faster  `
+                    },
+                 hideClass: {
+                    popup: `
+                        animate__animated
+                        animate__zoomOut
+                        animate__faster
                     `
-                    },
-                  hideClass: {
-                    popup: `
-                      animate__animated
-                      animate__fadeOutDown
-                      animate__faster
-                  `
-                    },
-                  title: '¡Excelente!',
-                  html: `<p>Puerta desbloqueada. ¡Vayamos dentro!</p>`,
+                        },
+                  title: '¡Estupendo!',
+                  html: `<p>Tenemos la tarjeta gráfica. ¡Busquemos los que faltan!</p>`,
                   confirmButtonText: 'Continuar',
                   allowOutsideClick: false,
-                  imageUrl: globalThis.personaje, // Ruta de la imagen
-                  imageWidth: 100, // Ancho de la imagen
-                  imageHeight: 100, // Alto de la imagen
+                  imageUrl:'assets/TarjetaGrafica.png', // Ruta de la imagen;
+                  imageWidth: 200, // Ancho de la imagen
+                  imageHeight: 115, // Alto de la imagen
                   imageAlt: 'Exclamación', // Texto alternativo
                 }).then((result) => {
                   if (result.isConfirmed) {
                     this.cameras.main.fadeOut(500, 0, 0, 0);
                     this.cameras.main.once('camerafadeoutcomplete', () => {
-                      this.scene.start('BasicoNueve'); // Cambia a la escena BasicoDos
+                      this.scene.start('BasicoDiecisiete'); // Cambia a la escena BasicoDos
                     });
                   }
                 });
@@ -219,6 +165,61 @@ class BasicoOcho extends Phaser.Scene {
             });
 
 
+        const libro = this.add.image(890, 100, 'libro').setInteractive();
+        libro.setScale(0.2); // Cambiar el tamaño del libro
+        libro.setVisible(true);
+        libro.on('pointerover', () => {
+            this.input.setDefaultCursor('pointer');
+            libro.setScale(0.3); // Aumentar tamaño al pasar el ratón
+        });
+        libro.on('pointerout', () => {
+            this.input.setDefaultCursor('default');
+            libro.setScale(0.2); // Volver al tamaño original 
+        });
+        this.tweens.add({
+            targets: libro,
+            alpha: .2,           // Aparece
+            duration: 1000,      
+            ease: 'Sine.easeInOut',
+            yoyo: true,         // Regresa a su tamaño original
+            repeat: -1          // Infinito
+        });
+        libro.on('pointerdown', () => {
+            Swal.fire({
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeInTopRight
+                      animate__faster  `
+                  },
+                  hideClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeOutTopRight
+                      animate__faster
+                    `
+                  },
+                 title: 'La tarjeta gráfica',
+                 html:`<p>La tarjeta gráfica, también conocida como GPU, es el componente de la computadora encargado de generar y mostrar
+                 las imágenes en la pantalla. Se encarga de procesar todo lo relacionado con gráficos, desde los íconos del escritorio
+                 hasta los videojuegos o programas de diseño. Gracias a ella, las imágenes se ven fluidas, detalladas y con buena calidad.
+                 Algunas vienen integradas en la placa base o el procesador, y otras son tarjetas dedicadas más potentes que se instalan por separado.</p>`,
+                 confirmButtonText: 'Continuar',
+                 allowOutsideClick: false,
+                 background: 'transparent url(./assets/Pergamino.png)',
+             }).then((result) => {
+                if (result.isConfirmed) {
+                    // Acciones al confirmar el libro
+                }
+            }) 
+         });
+
+
+
+
     }
+
+
+
 }
-export default BasicoOcho;
+export default BasicoDieciseis;

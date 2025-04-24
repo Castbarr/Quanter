@@ -30,6 +30,7 @@ class MenuPrincipal extends Phaser.Scene {
       });
   });  
 
+
     const botonMedio = this.add.image(300, 300, 'botonMedio').setInteractive();
     botonMedio.setScale(0.5);
     botonMedio.on('pointerover', () => {
@@ -40,6 +41,7 @@ class MenuPrincipal extends Phaser.Scene {
       this.input.setDefaultCursor('default');
       botonMedio.setScale(0.5); // Volver al tamaño original 
     });
+    
 
     const botonAvanzado = this.add.image(700, 300, 'botonAvanzado').setInteractive();
     botonAvanzado.setScale(0.5);
