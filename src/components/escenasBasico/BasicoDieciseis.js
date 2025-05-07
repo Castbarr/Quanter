@@ -9,9 +9,14 @@ class BasicoDieciseis extends Phaser.Scene {
     preload() {
     }
     create(){
+        const sonidos = this.registry.get("sonidos");
+
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
+        this.cameras.main.once('camerafadeincomplete', () => {
+          sonidos.musicaEnfoque.play(); // Reproducir el sonido de abrir puerta
+        });
         this.add.image(500, 300, "almacenDesenfocado");
-        this.add.image(500, 300, "tarjetaGraficaCaja");
         mostrarPuntos(this);
 
 
@@ -24,6 +29,15 @@ class BasicoDieciseis extends Phaser.Scene {
         }
         const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
         Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
+
+
+        const caja = this.add.image(500, 300, "tarjetaGraficaCaja");
+        caja.setScale(0.1); // Cambiar el tamaño de la caja
+        this.tweens.add({
+            targets: caja,
+            scale: 1, // Cambiar el tamaño de la caja
+            duration: 1000,
+        });
 
 
         const flecha = this.add.image(40, 300, 'flecha').setInteractive();
@@ -47,6 +61,7 @@ class BasicoDieciseis extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
+            sonidos.musicaFlecha.play();
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoQuince'); // Cambia a la escena BasicoDos
@@ -61,7 +76,7 @@ class BasicoDieciseis extends Phaser.Scene {
         };
         const pregunta = this.add.image(500, 300, 'pregunta').setInteractive();
         pregunta.setScale(0.7);
-        pregunta.setVisible(true);
+        pregunta.setVisible(false);
         pregunta.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             pregunta.setScale(0.8); // Aumentar tamaño al pasar el ratón
@@ -79,6 +94,7 @@ class BasicoDieciseis extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         pregunta.on('pointerdown', () => {
+            sonidos.tecladoDigital.play();
             pregunta.setVisible(false); // Ocultar el cuadro de información 
             Swal.fire({
               showClass: {
@@ -109,8 +125,7 @@ class BasicoDieciseis extends Phaser.Scene {
                 const respuestaSeleccionada = opciones[respuesta]; // Obtener la respuesta seleccionada
                 const puntos = this.registry.get('puntos');
                 if (respuestaSeleccionada !== respuestaCorrecta) {
-                console.log(respuestaIncorrecta, respuestaIncorrectaDos);
-                console.log(respuestaSeleccionada);
+                sonidos.no.play();
                 pregunta.setVisible(true);  
                 Swal.fire({
                   title: '¡Incorrecto!',
@@ -125,9 +140,12 @@ class BasicoDieciseis extends Phaser.Scene {
                   this.registry.set('puntos', puntos - 1); // Restar un punto
                   if (puntos === 1) {
                   Swal.close(); // Cerrar el modal
-                  this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                  this.scene.start('BasicoTreinta'); // Reinicia la escena si los puntos son cero
+                  sonidos.peligroFinal.play();
+                  sonidos.musicaFondo.stop();
                   }
                 } else {
+                 sonidos.si.play();
                  Swal.fire({
                  showClass: {
                     popup: `
@@ -152,9 +170,10 @@ class BasicoDieciseis extends Phaser.Scene {
                   imageAlt: 'Exclamación', // Texto alternativo
                 }).then((result) => {
                   if (result.isConfirmed) {
+                    sonidos.vamos.play();
                     this.cameras.main.fadeOut(500, 0, 0, 0);
                     this.cameras.main.once('camerafadeoutcomplete', () => {
-                      this.scene.start('BasicoDiecisiete'); // Cambia a la escena BasicoDos
+                    this.scene.start('BasicoDiecisiete'); // Cambia a la escena BasicoDos
                     });
                   }
                 });
@@ -185,6 +204,7 @@ class BasicoDieciseis extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         libro.on('pointerdown', () => {
+            sonidos.musicaLibro.play();
             Swal.fire({
                 showClass: {
                     popup: `
@@ -209,7 +229,8 @@ class BasicoDieciseis extends Phaser.Scene {
                  background: 'transparent url(./assets/Pergamino.png)',
              }).then((result) => {
                 if (result.isConfirmed) {
-                    // Acciones al confirmar el libro
+                    sonidos.musicaLibro.play();
+                    pregunta.setVisible(true);
                 }
             }) 
          });

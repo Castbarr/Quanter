@@ -10,6 +10,8 @@ class BasicoSiete extends Phaser.Scene {
     }
 
     create() {
+        const sonidos = this.registry.get("sonidos");
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
         this.add.image(500, 300, "pasilloDos");
         mostrarPuntos(this);
@@ -35,7 +37,8 @@ class BasicoSiete extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
-            this.cameras.main.fadeOut(500, 0, 0, 0);
+            sonidos.correr.play(); // Reproducir el sonido de abrir puerta
+            this.cameras.main.fadeOut(2000, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoOcho'); // Cambia a la escena BasicoDos
             });
@@ -63,6 +66,7 @@ class BasicoSiete extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
+            sonidos.oHDos.play(); // Reproducir el sonido de abrir puerta
             informacion.setVisible(false);
             Swal.fire({
                 showClass: {
@@ -89,6 +93,7 @@ class BasicoSiete extends Phaser.Scene {
                 imageAlt: 'Exclamación', // Texto alternativo
             }).then((result) => {
                 if (result.isConfirmed) {
+                    sonidos.musicaInformacion.play(); // Reproducir el sonido de abrir puerta
                     flecha.setVisible(true);
                 }
             }) 
@@ -115,8 +120,10 @@ class BasicoSiete extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flechaDos.on('pointerdown', () => {
+            sonidos.abriendoPuerta.play();
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
+            sonidos.musicaFondo.stop(); // Reproducir la música de fondo  
             this.scene.start('BasicoSeis'); // Cambia a la escena BasicoDos
             }); 
         });

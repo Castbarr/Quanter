@@ -6,10 +6,8 @@
         "Un dispositivo esencial para la comunicación.",
         "Aparato que procesa datos y sigue instrucciones.",
         "Un asistente digital para múltiples funciones.",
-        "Herramienta indispensable en la era moderna.",
         "Un sistema que facilita la productividad.",
-        "Máquina electrónica que transforma datos en resultados.",
-        "Computadora: el núcleo del mundo digital."
+        "Máquina electrónica que transforma datos en resultados."
     ],
     "respuestasIncorrectasUno":[
         "Un cerebro digital que solo funciona con internet.",
@@ -66,31 +64,32 @@
         
     ],
     "respuestasCorrectasCuatro":[
-        "La parte física de la computadora."
+        "Monitor y teclado",
+        "Mouse y auriculares",
+        "Altavoces e impresora",
+        "Disco duro externo y usb",
+        "Monitor y Ráton",
+        "Bocinas y teclado",
+        "Impresora y auriculares"
     ],
     "respuestasIncorrectasCuatro":[
-        "Es lo mismo que el software.",
-        "Son los programas de la computadora.",
-        "Es solo información almacenada.",
-        "Es la conexión inalámbrica entre dispositivos.",
-        "Son los algoritmos que procesan datos.",
-        "Es la parte virtual de un sistema.",
-        "Son las aplicaciones como Word o Chrome.",
-        "Es sinónimo de Internet.",
-        "Permite que los dispositivos funcionen sin electricidad.",
-        "Es cualquier código de programación."
+        "procesador y memoria ram",
+        "Monitor y procesador",
+        "teclado y memoria ram",
+        "Refrigeración y fuente de alimentación",
+        "MotherBoard y usb",
+        "Monitor y cpu",
+        "Altavoces y fuente de alimentación",
+        "Mouse y tarjeta grafica"
     ],
     "respuestasCorrectasCinco":[
         "Es una tarjeta donde se conectan los componentes principales del computador.",
         "Permite que el procesador, la RAM y otros dispositivos trabajen juntos.",
-        "Es esencial para el funcionamiento del equipo.",
         "También se le conoce como tarjeta madre o motherboard.",
         "Distribuye la energía a los distintos componentes.",
         "Conecta partes como el disco duro, la tarjeta gráfica y la memoria RAM.",
         "Sin ella, los componentes no podrían comunicarse.",
-        "Es como el corazón del sistema.",
-        "Actúa como centro de control y conexión.",
-        "Es una parte física fundamental en el interior del gabinete."
+        "Actúa como centro de control y conexión."
     ],
     "respuestasIncorrectasCinco":[
         "Es el componente que almacena toda la información del usuario.",
@@ -109,11 +108,9 @@
         "Ejecuta instrucciones de los programas.",
         "Realiza cálculos para que todo funcione bien.",
         "Coordina las tareas del sistema.",
-        "Sin él, la computadora no puede operar.",
         "Interpreta lo que el usuario quiere hacer.",
         "Es fundamental para abrir y usar aplicaciones.",
         "Trabaja constantemente mientras usas el equipo.",
-        "Es una de las piezas más importantes.",
         "Está dentro de la placa base."
     ],
     "respuestasIncorrectasSeis":[
@@ -175,5 +172,118 @@
         "Sirve solo para conectar más pantallas a la computadora.",
         "Está ubicada dentro del monitor, no en la computadora.",
         "Solo es útil cuando se usa una impresora."
+    ],
+    "respuestasCorrectasNueve":[
+        "Es donde se guarda la información de la computadora.",
+        "Almacena el sistema operativo y los programas.",
+        "Guarda archivos como fotos, documentos y música.",
+        "Es una memoria permanente, no se borra al apagar.",
+        "Puede ser un HDD o un SSD.",
+        "El SSD es más rápido que el disco duro tradicional.",
+        "Tanto el HDD como el SSD sirven para el almacenamiento de datos.",
+        "Es esencial para guardar información de forma persistente."
+    ],
+    "respuestasIncorrectasNueve":[
+        "Es la memoria que borra todo al apagar la computadora.",
+        "Es el componente que mejora la calidad gráfica.",
+        "Es la parte que enfría el procesador.",
+        "Solo sirve para jugar videojuegos.",
+        "Está dentro del monitor, no del gabinete.",
+        "Es lo mismo que la memoria RAM.",
+        "Es el chip que procesa todas las instrucciones del sistema.",
+        "Es el lugar donde se conectan los cables de red.",
+        "Es el encargado de mostrar las imágenes en pantalla.",
+        "No es necesario si tienes una buena tarjeta gráfica."
+    ],
+    "respuestasCorrectasDiez":[
+        "Es el sistema que mantiene fríos los componentes del PC.",
+        "Ayuda a evitar que el procesador se sobrecaliente.",
+        "Permite que el equipo funcione sin fallas por calor.",
+        "Usa ventiladores, disipadores o enfriamiento líquido.",
+        "Es esencial cuando se usan programas pesados.",
+        "Protege al hardware del daño por temperatura.",
+        "Evita que el rendimiento baje por exceso de calor.",
+        "Se activa automáticamente cuando sube la temperatura.",
+        "Usa ventiladores para mover el aire caliente fuera.",
+        "Es importante para el rendimiento y la durabilidad del PC."
+    ],
+    "respuestasIncorrectasDiez":[
+        "Es el sistema que apaga la computadora cuando hace calor.",
+        "Solo sirve en climas cálidos, no en lugares fríos.",
+        "Es un programa que enfría el disco duro.",
+        "Reemplaza a la tarjeta gráfica cuando está muy caliente.",
+        "Es el componente que guarda la temperatura de tus archivos.",
+        "Sirve para almacenar aire frío dentro del gabinete.",
+        "Es un botón que se presiona para bajar la temperatura.",
+        "Está en el monitor y no dentro de la computadora.",
+        "Solo lo tienen las computadoras para videojuegos.",
+        "No es importante si la computadora tiene mucha RAM."
+    ],
+    "respuestasCorrectasOnce":[
+        "Es el componente que da energía a la computadora.",
+        "Convierte la corriente del enchufe en voltajes adecuados.",
+        "Alimenta al procesador, placa base y demás partes.",
+        "Sin ella, la computadora no puede encender.",
+        "Distribuye la energía a todos los componentes internos.",
+        "Protege al equipo al entregar energía de forma segura.",
+        "Funciona como el cargador interno del equipo.",
+        "Transforma la energía eléctrica para que sea útil al hardware."
+    ],
+    "respuestasIncorrectasOnce":[
+        "Es el lugar donde se guarda la energía de la computadora.",
+        "Es la batería que mantiene la PC encendida sin cables.",
+        "Es un programa que controla la energía del sistema.",
+        "Solo alimenta a la pantalla y al teclado.",
+        "Es parte del disco duro.",
+        "Se encarga de enfriar los componentes internos.",
+        "Solo funciona cuando el procesador lo ordena.",
+        "Está integrada dentro del monitor.",
+        "No es necesaria si usas una laptop.",
+        "Es un accesorio opcional para mejorar el rendimiento."
+    ],
+    "respuestasCorrectasDoce":[
+        "Son los programas y aplicaciones de una computadora.",
+        "Es todo lo que no puedes tocar pero hace que funcione el equipo.",
+        "Incluye el sistema operativo y los programas de uso diario.",
+        "Permite que puedas usar la computadora para distintas tareas.",
+        "Es lo que le da instrucciones al hardware.",
+        "Sin software, el hardware no sabría qué hacer.",
+        "Son los juegos, navegadores y editores que usas en tu PC.",
+        "Es el conjunto de instrucciones que maneja los componentes físicos."
+    ],
+    "respuestasIncorrectasDoce":[
+        "Es la parte física que puedes tocar en una computadora.",
+        "Son los cables que conectan los dispositivos.",
+        "Es la memoria RAM de la computadora.",
+        "Son las piezas internas como el procesador y la placa base.",
+        "Es el disco duro donde se almacenan los programas.",
+        "Es solo el sistema operativo, nada más.",
+        "Es el ventilador que mantiene fría la computadora.",
+        "Es un accesorio que se conecta por USB.",
+        "Es el tipo de electricidad que usa la computadora.",
+        "Es la caja donde guardas la computadora portátil."
+    ],
+    "respuestasCorrectasTrece":[
+        "El sistema operativo es un ejemplo de software de sistema.",
+        "Navegar por internet es posible gracias al software de aplicación.",
+        "Un editor de fotos es un tipo de software de aplicación.",
+        "El software de programación se usa para crear otros programas.",
+        "Los programadores usan software especial para escribir código.",
+        "Sin el software de sistema, no podríamos usar el equipo.",
+        "Existen tres tipos de software",
+        "El software de programación es uno de los tres tipos de software"
+    ],
+    "respuestasIncorrectasTrece":[
+        "Todos los programas de una computadora son software de aplicación.",
+        "El software de sistema sirve para editar imágenes y textos.",
+        "Solo existe un tipo de software en una computadora.",
+        "El software de programación se instala automáticamente al encender el equipo.",
+        "El navegador web es un tipo de software de sistema.",
+        "El sistema operativo se considera software de aplicación.",
+        "El software de programación está hecho solo para diseñadores gráficos.",
+        "No se puede usar el software de aplicación sin conexión a internet.",
+        "El software de sistema solo se usa en servidores.",
+        "Los tipos de software no influyen en el uso diario de la computadora."
     ]
+
 }

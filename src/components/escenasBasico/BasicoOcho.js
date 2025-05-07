@@ -10,7 +10,11 @@ class BasicoOcho extends Phaser.Scene {
     }
 
     create() {
+        const sonidos = this.registry.get("sonidos");
+
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
+        sonidos.suspiro.play(); // Reproducir el sonido de abrir puerta
         this.add.image(500, 300, "puertaAlmacen");
         mostrarPuntos(this);
 
@@ -74,6 +78,7 @@ class BasicoOcho extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
+            sonidos.mmm.play(); // Reproducir el sonido de abrir puerta
             informacion.setVisible(false); // Ocultar el cuadro de información
             Swal.fire({
                 showClass: {
@@ -100,7 +105,9 @@ class BasicoOcho extends Phaser.Scene {
                 imageAlt: 'personaje', // Texto alternativo
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        sonidos.musicaInformacion.play(); // Reproducir el sonido de abrir puerta
                         pregunta.setVisible(true); // Mostrar la pregunta al hacer clic en el cuadro de información
+                        libro.setVisible(true);
                     }
                 }) 
         });
@@ -132,6 +139,7 @@ class BasicoOcho extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         pregunta.on('pointerdown', () => {
+            sonidos.tecladoDigital.play(); // Reproducir el sonido de abrir puerta
             pregunta.setVisible(false); // Ocultar el cuadro de información 
             Swal.fire({
               showClass: {
@@ -147,7 +155,7 @@ class BasicoOcho extends Phaser.Scene {
                   animate__faster
                 `
                   },
-              title: '¿Qué es Hardware?',
+              title: 'Son componentes externos de una computadora:',
               input: 'radio',
               allowOutsideClick: false,
               inputOptions: opciones,
@@ -162,8 +170,7 @@ class BasicoOcho extends Phaser.Scene {
                 const respuestaSeleccionada = opciones[respuesta]; // Obtener la respuesta seleccionada
                 const puntos = this.registry.get('puntos');
                 if (respuestaSeleccionada !== respuestaCorrecta) {
-                console.log(respuestaIncorrecta, respuestaIncorrectaDos);
-                console.log(respuestaSeleccionada);
+                sonidos.no.play(); // Reproducir el sonido de abrir puerta
                 pregunta.setVisible(true);  
                 Swal.fire({
                   title: '¡Incorrecto!',
@@ -178,9 +185,12 @@ class BasicoOcho extends Phaser.Scene {
                   this.registry.set('puntos', puntos - 1); // Restar un punto
                   if (puntos === 1) {
                   Swal.close(); // Cerrar el modal
-                  this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                  this.scene.start('BasicoTreinta'); // Reinicia la escena si los puntos son cero
+                  sonidos.peligroFinal.play();
+                  sonidos.musicaFondo.stop();
                   }
                 } else {
+                 sonidos.si.play(); // Reproducir el sonido de abrir puerta
                  Swal.fire({
                   showClass: {
                     popup: `
@@ -206,8 +216,10 @@ class BasicoOcho extends Phaser.Scene {
                   imageAlt: 'Exclamación', // Texto alternativo
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    this.cameras.main.fadeOut(500, 0, 0, 0);
+                    sonidos.abriendoPuerta.play(); // Reproducir el sonido de abrir puerta
+                    this.cameras.main.fadeOut(2000, 0, 0, 0);
                     this.cameras.main.once('camerafadeoutcomplete', () => {
+                      sonidos.musicaFondo.stop(); // Detener la música de fondo
                       this.scene.start('BasicoNueve'); // Cambia a la escena BasicoDos
                     });
                   }
@@ -217,6 +229,64 @@ class BasicoOcho extends Phaser.Scene {
               });
               
             });
+
+
+        const libro = this.add.image(890, 100, 'libro').setInteractive();
+        libro.setScale(0.2); // Cambiar el tamaño del libro
+        libro.setVisible(false);
+        libro.on('pointerover', () => {
+            this.input.setDefaultCursor('pointer');
+            libro.setScale(0.3); // Aumentar tamaño al pasar el ratón
+        });
+        libro.on('pointerout', () => {
+            this.input.setDefaultCursor('default');
+            libro.setScale(0.2); // Volver al tamaño original 
+        });
+        this.tweens.add({
+            targets: libro,
+            alpha: .2,           // Aparece
+            duration: 1000,      
+            ease: 'Sine.easeInOut',
+            yoyo: true,         // Regresa a su tamaño original
+            repeat: -1          // Infinito
+        });
+        libro.on('pointerdown', () => {
+            sonidos.musicaLibro.play(); // Reproducir la música de fondo
+            Swal.fire({
+                showClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeInTopRight
+                      animate__faster  `
+                  },
+                  hideClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeOutTopRight
+                      animate__faster
+                    `
+                  },
+                 title: 'Hardware: parte fisica de la computadora',
+                 html:` 
+                 <h6 style="margin:0; padding:0; text-align: left"><strong>Componentes externos o perifericos:</strong></h6>
+                 <ul style="text-align: left;">
+                     <li>Teclado</li>
+                     <li>Mouse(Ráton)</li>
+                     <li>Monitor</li>
+                     <li>Impresora</li>
+                     <li>Altavoces(Bocinas)</li>
+                     <li>Auriculares</li>
+                     <li>Almacenamiento externo: discos duros, memorias usb, etc.</li>
+                     </ul>`,
+                 confirmButtonText: 'Continuar',
+                 allowOutsideClick: false,
+                 background: 'transparent url(./assets/Pergamino.png)',
+             }).then((result) => {
+                if (result.isConfirmed) {
+                    sonidos.musicaLibro.play(); // Detener la música de fondo
+                }
+            }) 
+         });
 
 
     }

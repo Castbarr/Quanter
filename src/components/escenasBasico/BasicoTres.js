@@ -10,9 +10,14 @@ class BasicoTres extends Phaser.Scene{
     preload(){
     }
     create(){
+        const sonidos = this.registry.get('sonidos');
+
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
+        sonidos.suspiro.play(); // Reproducir la música de fondo
         this.add.image(500, 300, 'oficinaSeguridad');
         mostrarPuntos(this);
+
 
         const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
         const respuestaCorrecta = Phaser.Math.RND.pick(respuestas.respuestasCorrectasUno);  ; // Obtener la respuesta correcta del JSON
@@ -45,6 +50,7 @@ class BasicoTres extends Phaser.Scene{
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
+            sonidos.musicaFlecha.play(); // Reproducir la música de fondo
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoDos'); // Cambia a la escena BasicoDos
@@ -77,6 +83,7 @@ class BasicoTres extends Phaser.Scene{
             repeat: -1          // Infinito
         });
         pregunta.on('pointerdown', () => {
+            sonidos.tecladoDigital.play(); // Reproducir la música de fondo
             pregunta.setVisible(false); // Ocultar el cuadro de información 
             Swal.fire({
                 showClass: {
@@ -107,6 +114,7 @@ class BasicoTres extends Phaser.Scene{
                   const respuestaSeleccionada = opciones[respuesta]; // Obtener la respuesta seleccionada
                   const puntos = this.registry.get('puntos');
                   if (respuestaSeleccionada !== respuestaCorrecta) {
+                    sonidos.no.play(); // Reproducir la música de fondo
                     pregunta.setVisible(true);  
                     Swal.fire({
                         title: '¡Incorrecto!',
@@ -121,9 +129,12 @@ class BasicoTres extends Phaser.Scene{
                     this.registry.set('puntos', puntos - 1); // Restar un punto
                     if (puntos === 1) {
                         Swal.close(); // Cierra la alerta de incorrecto
-                        this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                        this.scene.start('BasicoTreinta'); // Reinicia la escena si los puntos son cero
+                        sonidos.peligroFinal.play();
+                        sonidos.musicaFondo.stop();
                       }
                   } else {
+                    sonidos.si.play(); // Reproducir la música de fondo
                      Swal.fire({
                         showClass: {
                             popup: `
@@ -149,9 +160,10 @@ class BasicoTres extends Phaser.Scene{
                         imageAlt: 'Exclamación', // Texto alternativo
                     }).then((result) => {
                         if (result.isConfirmed) {
+                          sonidos.abriendoPuerta.play(); // Reproducir la música de fondo
                           this.cameras.main.fadeOut(500, 0, 0, 0);
                           this.cameras.main.once('camerafadeoutcomplete', () => {
-                            this.scene.start('BasicoCuatro'); // Cambia a la escena BasicoDos
+                          this.scene.start('BasicoCuatro'); // Cambia a la escena BasicoDos
                           });
                         }
                       });
@@ -183,6 +195,7 @@ class BasicoTres extends Phaser.Scene{
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
+            sonidos.oH.play(); // Reproducir la música de fondo
             informacion.setVisible(false); // Ocultar el cuadro de información
             Swal.fire({
                 showClass: {
@@ -209,6 +222,7 @@ class BasicoTres extends Phaser.Scene{
                 imageAlt: 'Exclamación', // Texto alternativo
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        sonidos.musicaInformacion.play();
                         pregunta.setVisible(true);
                     }
                 }) 

@@ -19,6 +19,25 @@ import BasicoCatorce from './escenasBasico/BasicoCatorce';
 import BasicoQuince from './escenasBasico/BasicoQuince';
 import BasicoDieciseis from './escenasBasico/BasicoDieciseis';
 import BasicoDiecisiete from './escenasBasico/BasicoDiecisiete';
+import BasicoDieciocho from './escenasBasico/BasicoDieciocho';
+import BasicoDiecinueve from './escenasBasico/BasicoDiecinueve';
+import BasicoVeinte from './escenasBasico/BasicoVeinte';
+import BasicoVeintiuno from './escenasBasico/BasicoVeintiuno';
+import BasicoVeintidos from './escenasBasico/BasicoVeintidos';
+import BasicoVeintitres from './escenasBasico/BasicoVeintitres';
+import BasicoVeinticuatro from './escenasBasico/BasicoVeinticuatro';
+import BasicoVeinticinco from './escenasBasico/BasicoVeinticinco';
+import BasicoVeintiseis from './escenasBasico/BasicoVeintiseis';
+import BasicoVeintisiete from './escenasBasico/BasicoVeintisiete';
+import BasicoVeintiocho from './escenasBasico/BasicoVeintiocho';
+import BasicoVeintinueve from './escenasBasico/BasicoVeintinueve';
+import BasicoTreinta from './escenasBasico/BasicoTreinta';
+import BasicoTreintaiuno from './escenasBasico/BasicoTreintaiuno';
+import BasicoTreintaidos from './escenasBasico/BasicoTreintaidos';
+import JuegoGanado from './escenasBasico/JuegoGanado';
+import JuegoPerdido from './escenasBasico/JuegoPerdido';
+
+
 
 
 const config = {
@@ -33,7 +52,9 @@ const config = {
   scene: [
     EscenaArranque, Portada, MenuPrincipal, 
     InicioBasico, BasicoDos, BasicoTres, BasicoCuatro, BasicoCinco, BasicoSeis, BasicoSiete, BasicoOcho, BasicoNueve, BasicoDiez,
-    BasicoOnce, BasicoDoce, BasicoTrece, BasicoCatorce, BasicoQuince, BasicoDieciseis, BasicoDiecisiete
+    BasicoOnce, BasicoDoce, BasicoTrece, BasicoCatorce, BasicoQuince, BasicoDieciseis, BasicoDiecisiete, BasicoDieciocho, BasicoDiecinueve,
+    BasicoVeinte, BasicoVeintiuno, BasicoVeintidos, BasicoVeintitres, BasicoVeinticuatro, BasicoVeinticinco, BasicoVeintiseis, BasicoVeintisiete,
+    BasicoVeintiocho, BasicoVeintinueve, BasicoTreinta, BasicoTreintaiuno, BasicoTreintaidos, JuegoGanado, JuegoPerdido
   ]
 };
 

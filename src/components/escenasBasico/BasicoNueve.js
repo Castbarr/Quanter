@@ -9,9 +9,16 @@ class BasicoNueve extends Phaser.Scene {
     preload() {
     }
     create() {
+        const sonidos = this.registry.get("sonidos");
+
+        this.add.image(500, 300, "almacenMonitorApagado");
+        mostrarPuntos(this);
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
-        // 1. Guardar valores originales
+        sonidos.musicaFondo.stop(); // Detener la música de fondo
+        sonidos.caminando.play(); // Reproducir el sonido de abrir puerta
         this.time.delayedCall(1000, () => {
+        sonidos.musicaEnfoque.play(); // Reproducir el sonido de abrir puerta
         const cam = this.cameras.main;
         const originalX = cam.midPoint.x;
         const originalY = cam.midPoint.y;
@@ -27,21 +34,21 @@ class BasicoNueve extends Phaser.Scene {
         cam.once('camerazoomcomplete', () => {
             // Esperar un poco antes de volver (ej: 500ms)
             this.time.delayedCall(100, () => {
+                sonidos.musicaEnfoque.play(); // Detener el sonido de abrir puerta
                 cam.pan(originalX, originalY, duration, 'Power2');
                 cam.zoomTo(originalZoom, duration, 'Power2');
                 informacion.setVisible(true); // Mostrar el cuadro de información
+                flecha.setVisible(true); // Hacer visible la flecha
             });
         });
         });
 
 
-        this.add.image(500, 300, "almacenMonitorApagado");
-        mostrarPuntos(this);
 
         const flecha = this.add.image(90, 300, 'flecha').setInteractive();
         flecha.angle = -90; // Rotar la flecha 45 grados
         flecha.setScale(0.2); // Cambiar el tamaño de la flecha
-        flecha.setVisible(true);
+        flecha.setVisible(false);
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
@@ -59,8 +66,10 @@ class BasicoNueve extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
+            sonidos.abriendoPuerta.play(); // Reproducir el sonido de abrir puerta
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
+            sonidos.musicaFondo.play(); // Reproducir la música de fondo
             this.scene.start('BasicoOcho'); // Cambia a la escena BasicoDos
             });
         });
@@ -88,7 +97,7 @@ class BasicoNueve extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
-           // informacion.setVisible(false); // Ocultar el cuadro de información
+            sonidos.oH.play(); // Reproducir el sonido de abrir puerta
             Swal.fire({
                 showClass: {
                     popup: `
@@ -114,7 +123,7 @@ class BasicoNueve extends Phaser.Scene {
                 imageAlt: 'personaje', // Texto alternativo
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        //pregunta.setVisible(true); // Mostrar la pregunta al hacer clic en el cuadro de información
+                        sonidos.musicaInformacion.play(); // Reproducir el sonido de abrir puerta
                     }
                 }) 
         });
@@ -127,6 +136,7 @@ class BasicoNueve extends Phaser.Scene {
         tarjetaBase.setAlpha(.3);
         tarjetaBase.setVisible(true); 
         tarjetaBase.on('pointerover', () => {
+            sonidos.musicaEnfoqueDos.play(); // Reproducir el sonido de abrir puerta
             this.input.setDefaultCursor('pointer');
             tarjetaBase.setAlpha(1); // Aumentar tamaño al pasar el ratón
         });
@@ -135,7 +145,7 @@ class BasicoNueve extends Phaser.Scene {
             tarjetaBase.setAlpha(.3); // Volver al tamaño original 
         });
         tarjetaBase.on('pointerdown', () => {
-           // informacion.setVisible(false); // Ocultar el cuadro de información
+            sonidos.mmm.play(); // Reproducir el sonido de abrir puerta
             Swal.fire({
                 showClass: {
                     popup: `
@@ -152,7 +162,7 @@ class BasicoNueve extends Phaser.Scene {
                 `
                 },
                 title: '¡La placa base!',
-                html: `<p>Podre sacarla de la caja si decifro el codigo de seguridad. ¡Intentemoslo!</p>`,
+                html: `<p>Podré sacarla de la caja si decifro el código de seguridad. ¡Intentemoslo!</p>`,
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false,
                 imageUrl: globalThis.personaje, // Ruta de la imagen
@@ -161,9 +171,14 @@ class BasicoNueve extends Phaser.Scene {
                 imageAlt: 'personaje', // Texto alternativo
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        sonidos.vamos.play(); // Reproducir el sonido de abrir puerta
+                        this.cameras.main.fadeOut(2000, 0, 0, 0);
+                        this.cameras.main.once('camerafadeoutcomplete', () => {
                         this.scene.start('BasicoDiez'); 
+                        });
                     }
-                }) 
+                
+                });
         });
 
 

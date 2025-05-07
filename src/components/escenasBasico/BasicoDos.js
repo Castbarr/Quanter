@@ -9,8 +9,10 @@ class BasicoDos extends Phaser.Scene {
     preload(){
     }
     create(){
+        const sonidos = this.registry.get('sonidos');
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
-        this.add.image(500, 300, 'fondoBasicoDos')
+        this.add.image(500, 300, 'pasillo')
         mostrarPuntos(this);
 
         const flecha = this.add.image(80, 300, 'flecha').setInteractive();
@@ -33,6 +35,7 @@ class BasicoDos extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
+            sonidos.musicaFlecha.play(); // Reproducir la música de fondo
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('InicioBasico'); // Cambia a la escena BasicoDos
@@ -60,7 +63,9 @@ class BasicoDos extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flechaDos.on('pointerdown', () => {
-            this.cameras.main.fadeOut(500, 0, 0, 0);
+            sonidos.musicaFlecha.play(); // Reproducir la música de fondo
+            sonidos.correr.play(); // Reproducir la música de fondo
+            this.cameras.main.fadeOut(2000, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoTres'); // Cambia a la escena BasicoDos
             });  
@@ -88,6 +93,7 @@ class BasicoDos extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
+            sonidos.mmmDos.play(); // Reproducir la música de fondo
             informacion.setVisible(false);
             Swal.fire({
                 showClass: {
@@ -114,6 +120,7 @@ class BasicoDos extends Phaser.Scene {
                 imageAlt: 'Exclamación', // Texto alternativo
             }).then((result) => {
                 if (result.isConfirmed) {
+                    sonidos.musicaInformacion.play(); 
                     flechaDos.setVisible(true);
                 }
             }) 

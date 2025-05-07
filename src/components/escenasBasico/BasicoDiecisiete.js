@@ -9,14 +9,45 @@ class BasicoDiecisiete extends Phaser.Scene{
     preload(){
     }
     create(){
-        this.cameras.main.fadeIn(500, 0, 0, 0);
+        const sonidos = this.registry.get("sonidos");
+
+
         this.add.image(500, 300, "almacenMonitorApagado");
         mostrarPuntos(this);
+
+
+        this.cameras.main.fadeIn(500, 0, 0, 0);
+        sonidos.caminando.play(); // Reproducir el sonido de caminar
+        this.time.delayedCall(1000, () => {
+        sonidos.musicaEnfoque.play();
+        const cam = this.cameras.main;
+        const originalX = cam.midPoint.x;
+        const originalY = cam.midPoint.y;
+        const originalZoom = cam.zoom;
+        // 2. Pan + Zoom hacia la zona objetivo
+        const zoomLevel = 1.5;
+        const duration = 2000;
+        cam.pan(200, 300, duration, 'Power2');
+        cam.zoomTo(zoomLevel, duration, 'Power2');
+        // 3. Luego de terminar el zoom, volver atrás
+        cam.once('camerazoomcomplete', () => {
+            cam.pan(700, 300, duration, 'Power2');
+            cam.once('camerapancomplete', () => {
+            this.time.delayedCall(100, () => {
+                sonidos.musicaEnfoque.play(); // Reproducir el sonido de enfoque
+                cam.pan(originalX, originalY, duration, 'Power2');
+                cam.zoomTo(originalZoom, duration, 'Power2');
+                flecha.setVisible(true); // Hacer visible la flecha
+            });
+        });
+        });
+        });
+
 
         const flecha = this.add.image(40, 300, 'flecha').setInteractive();
         flecha.angle = -90; // Rotar la flecha 45 grados
         flecha.setScale(0.2); // Cambiar el tamaño de la flecha
-        flecha.setVisible(true);
+        flecha.setVisible(false);
         flecha.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             flecha.setScale(0.3); // Aumentar tamaño al pasar el ratón
@@ -34,6 +65,7 @@ class BasicoDiecisiete extends Phaser.Scene{
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
+            sonidos.musicaFlecha.play();
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoDieciseis'); // Cambia a la escena BasicoDos
@@ -49,13 +81,14 @@ class BasicoDiecisiete extends Phaser.Scene{
         discoCaja.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             discoCaja.setAlpha(1); // Aumentar tamaño al pasar el ratón
+            sonidos.musicaEnfoqueDos.play();
         });
         discoCaja.on('pointerout', () => {
             this.input.setDefaultCursor('default');
             discoCaja.setAlpha(.2); // Volver al tamaño original 
         });
         discoCaja.on('pointerdown', () => {
-            // informacion.setVisible(false); // Ocultar el cuadro de información
+            sonidos.mmm.play();
             Swal.fire({
                 showClass: {
                     popup: `
@@ -71,8 +104,8 @@ class BasicoDiecisiete extends Phaser.Scene{
                     animate__faster
                 `
                 },
-                title: '¡La tarjeta gráfica!',
-                html: `<p>A descifrar el código. ¡En marcha!</p>`,
+                title: '¡El disco duro!',
+                html: `<p>Descifremos el código. ¡Vamos!</p>`,
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false,
                 imageUrl: globalThis.personaje, // Ruta de la imagen
@@ -81,7 +114,11 @@ class BasicoDiecisiete extends Phaser.Scene{
                 imageAlt: 'personaje', // Texto alternativo
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        this.scene.start('BasicoDieciseis'); 
+                        sonidos.vamos.play();
+                        this.cameras.main.fadeOut(2000, 0, 0, 0);
+                        this.cameras.main.once('camerafadeoutcomplete', () => {
+                        this.scene.start('BasicoDieciocho'); 
+                        }); 
                     }
                 }) 
         });

@@ -8,6 +8,8 @@ class BasicoSeis extends Phaser.Scene {
     preload() {
     }
     create() {
+        const sonidos = this.registry.get("sonidos");
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
         this.add.image(500, 300, "oficinaSeguridadInterna");
         mostrarPuntos(this);
@@ -33,8 +35,10 @@ class BasicoSeis extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
-            this.cameras.main.fadeOut(500, 0, 0, 0);
+            sonidos.abriendoPuerta.play(); // Reproducir el sonido de abrir puerta
+            this.cameras.main.fadeOut(2000, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
+            sonidos.musicaFondo.play(); // Reproducir la música de fondo
             this.scene.start('BasicoSiete'); // Cambia a la escena BasicoDos
             });
         });
@@ -61,6 +65,7 @@ class BasicoSeis extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flechaDos.on('pointerdown', () => {
+            sonidos.musicaFlecha.play(); // Reproducir el sonido de flecha
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoCinco');  

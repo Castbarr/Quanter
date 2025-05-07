@@ -9,10 +9,15 @@ class BasicoDiez extends Phaser.Scene {
     preload() {
     }
     create(){
+        const sonidos = this.registry.get("sonidos");
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
+        this.cameras.main.once('camerafadeincomplete', () => {
+          sonidos.musicaEnfoque.play(); // Reproducir el sonido de abrir puerta
+        });
         this.add.image(500, 300, "almacenDesenfocado");
-        this.add.image(500, 300, "tarjetaMadreCaja");
         mostrarPuntos(this);
+        
 
 
         const respuestas = this.cache.json.get('respuestas'); // Obtener el contenido del archivo JSON
@@ -25,6 +30,13 @@ class BasicoDiez extends Phaser.Scene {
         const grupoRespuestas = [respuestaCorrecta, respuestaIncorrecta, respuestaIncorrectaDos]; // Agrupar las respuestas
         Phaser.Utils.Array.Shuffle(grupoRespuestas); // Mezclar las respuestas
 
+        const caja = this.add.image(500, 300, "tarjetaMadreCaja");
+        caja.setScale(0.1); // Cambiar el tamaño de la caja
+        this.tweens.add({
+            targets: caja,
+            scale: 1, // Cambiar el tamaño de la caja
+            duration: 1000,
+        });
 
         const flecha = this.add.image(40, 300, 'flecha').setInteractive();
         flecha.angle = -90; // Rotar la flecha 45 grados
@@ -47,6 +59,7 @@ class BasicoDiez extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
+            sonidos.musicaFlecha.play();
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoNueve'); // Cambia a la escena BasicoDos
@@ -61,7 +74,7 @@ class BasicoDiez extends Phaser.Scene {
         };
         const pregunta = this.add.image(500, 300, 'pregunta').setInteractive();
         pregunta.setScale(0.7);
-        pregunta.setVisible(true);
+        pregunta.setVisible(false);
         pregunta.on('pointerover', () => {
             this.input.setDefaultCursor('pointer');
             pregunta.setScale(0.8); // Aumentar tamaño al pasar el ratón
@@ -79,7 +92,8 @@ class BasicoDiez extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         pregunta.on('pointerdown', () => {
-            pregunta.setVisible(false); // Ocultar el cuadro de información 
+            sonidos.tecladoDigital.play(); 
+            pregunta.setVisible(false); 
             Swal.fire({
               showClass: {
                 popup: `
@@ -109,8 +123,7 @@ class BasicoDiez extends Phaser.Scene {
                 const respuestaSeleccionada = opciones[respuesta]; // Obtener la respuesta seleccionada
                 const puntos = this.registry.get('puntos');
                 if (respuestaSeleccionada !== respuestaCorrecta) {
-                console.log(respuestaIncorrecta, respuestaIncorrectaDos);
-                console.log(respuestaSeleccionada);
+                sonidos.no.play(); // Reproducir el sonido de respuesta incorrecta
                 pregunta.setVisible(true);  
                 Swal.fire({
                   title: '¡Incorrecto!',
@@ -125,9 +138,12 @@ class BasicoDiez extends Phaser.Scene {
                   this.registry.set('puntos', puntos - 1); // Restar un punto
                   if (puntos === 1) {
                   Swal.close(); // Cerrar el modal
-                  this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                  this.scene.start('BasicoTreinta'); // Reinicia la escena si los puntos son cero
+                  sonidos.peligroFinal.play();
+                  sonidos.musicaFondo.stop();
                   }
                 } else {
+                 sonidos.si.play(); // Reproducir el sonido de respuesta correcta
                  Swal.fire({
                  showClass: {
                     popup: `
@@ -152,9 +168,10 @@ class BasicoDiez extends Phaser.Scene {
                   imageAlt: 'Exclamación', // Texto alternativo
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    this.cameras.main.fadeOut(500, 0, 0, 0);
+                    sonidos.vamos.play(); 
+                    this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once('camerafadeoutcomplete', () => {
-                      this.scene.start('BasicoOnce'); // Cambia a la escena BasicoDos
+                    this.scene.start('BasicoOnce'); 
                     });
                   }
                 });
@@ -185,6 +202,7 @@ class BasicoDiez extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         libro.on('pointerdown', () => {
+            sonidos.musicaLibro.play(); // Reproducir el sonido de abrir libro
             Swal.fire({
                 showClass: {
                     popup: `
@@ -209,7 +227,8 @@ class BasicoDiez extends Phaser.Scene {
                  background: 'transparent url(./assets/Pergamino.png)',
              }).then((result) => {
                 if (result.isConfirmed) {
-                    // Acciones al confirmar el libro
+                    sonidos.musicaLibro.play(); 
+                    pregunta.setVisible(true); 
                 }
             }) 
          });

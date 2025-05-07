@@ -9,6 +9,10 @@ class Portada extends Phaser.Scene {
   }
 
   create() {
+    const sonidos = this.registry.get('sonidos');
+    sonidos.sonidoVictoriaFinal.stop();
+    sonidos.sonidoGameOver.stop();
+    sonidos.peligroFinal.stop();
     this.registry.set('puntos', 0);
     this.add.image(500, 300, 'fondo');
     const logo = this.add.image(500, 300, 'logoCompu');
@@ -53,13 +57,12 @@ let flecha; // Variable para almacenar la referencia a la imagen
 
 this.input.on('pointerdown', () => {
   if (!flecha) { // Verifica si la imagen ya fue creada
-    flecha = this.add.image(50, 25, 'flecha');
+    flecha = this.add.image(800, 30, 'flecha');
     flecha.setScale(0.2); // Escala inicial 
-    flecha.angle = -90; // Rotar la flecha -90 grados
 
     this.tweens.add({
       targets: flecha,
-      x: '+=20',          // Se mueve 20 píxeles hacia abajo
+      y: '+=20',          // Se mueve 20 píxeles hacia abajo
       duration: 600,      // Tiempo del movimiento
       ease: 'Sine.easeInOut',
       yoyo: true,         // Vuelve hacia atrás

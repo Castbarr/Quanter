@@ -1,7 +1,6 @@
 import Phaser from "phaser";
 import { mostrarPuntos } from '../Puntos';
 import Swal from "sweetalert2";
-import 'animate.css';
 
 class BasicoCinco extends Phaser.Scene {
     constructor() {
@@ -11,7 +10,10 @@ class BasicoCinco extends Phaser.Scene {
     }
 
     create() {
+        const sonidos = this.registry.get('sonidos'); // Obtener el objeto de sonidos del registro
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
+        sonidos.suspiro.play(); // Reproducir el sonido de suspiro
         this.add.image(500, 300, 'computadoraSeguridad');
         mostrarPuntos(this);
 
@@ -47,6 +49,7 @@ class BasicoCinco extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
+            sonidos.musicaFlecha.play(); // Reproducir el sonido de la flecha
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoCuatro'); // Cambia a la escena BasicoDos
@@ -75,6 +78,7 @@ class BasicoCinco extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         libro.on('pointerdown', () => {
+            sonidos.musicaLibro.play(); // Reproducir el sonido del libro
             Swal.fire({
                 showClass: {
                     popup: `
@@ -105,7 +109,11 @@ class BasicoCinco extends Phaser.Scene {
                  confirmButtonText: 'Continuar',
                  allowOutsideClick: false,
                  background: 'transparent url(./assets/Pergamino.png)',
-             })
+             }).then((result) => {
+                if (result.isConfirmed) {
+                    sonidos.musicaLibro.play(); // Reproducir el sonido del libro
+                }
+            });
          });
 
 
@@ -130,6 +138,7 @@ class BasicoCinco extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
+            sonidos.mmmDos.play(); // Reproducir el sonido de "mmm"
             informacion.setVisible(false); // Ocultar el cuadro de información
             Swal.fire({
                 showClass: {
@@ -156,7 +165,7 @@ class BasicoCinco extends Phaser.Scene {
                 imageAlt: 'personaje', // Texto alternativo
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        //pregunta.setVisible(true);
+                        sonidos.musicaInformacion.play(); // Reproducir el sonido de la información
                         libro.setVisible(true);
                         flecha.setVisible(true); // Mostrar la flecha al hacer clic en el cuadro de información
                         pregunta.setVisible(true); // Mostrar la pregunta al hacer clic en el cuadro de información
@@ -191,6 +200,7 @@ class BasicoCinco extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         pregunta.on('pointerdown', () => {
+        sonidos.tecleando.play(); // Reproducir el sonido de teclado digital
         pregunta.setVisible(false); // Ocultar el cuadro de información 
         Swal.fire({
             showClass: {
@@ -225,6 +235,7 @@ class BasicoCinco extends Phaser.Scene {
                 const respuestaSeleccionada = opciones[respuesta]; // Obtener la respuesta seleccionada
                 const puntos = this.registry.get('puntos');
                 if (respuestaSeleccionada !== respuestaCorrecta) {
+                sonidos.no.play(); // Reproducir el sonido de "no"
                 pregunta.setVisible(true);  
                 Swal.fire({
                     title: '¡Incorrecto!',
@@ -239,9 +250,12 @@ class BasicoCinco extends Phaser.Scene {
                     this.registry.set('puntos', puntos - 1); // Restar un punto
                     if (puntos === 1) {
                         Swal.close(); // Cerrar el modal de incorrecto
-                        this.scene.start('Portada'); // Reinicia la escena si los puntos son cero
+                        this.scene.start('BasicoTreinta'); // Reinicia la escena si los puntos son cero
+                        sonidos.peligroFinal.Play();
+                        sonidos.musicaFondo.stop();
                     }
                 } else {
+                    sonidos.si.play(); // Reproducir el sonido de "si"
                     Swal.fire({
                     showClass: {
                         popup: `
@@ -266,6 +280,7 @@ class BasicoCinco extends Phaser.Scene {
                     imageAlt: 'Exclamación', // Texto alternativo
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        sonidos.click.play(); // Reproducir el sonido de clic
                         Swal.fire({
                             showClass: {
                                 popup: `
@@ -292,6 +307,7 @@ class BasicoCinco extends Phaser.Scene {
                             allowOutsideClick: false,
                         }).then((result) => {
                             if (result.isConfirmed) {
+                                sonidos.musicaInformacion.play(); // Reproducir el sonido de "si"
                                 libro.setVisible(false); // Ocultar el libro al hacer clic en el cuadro de información
                                 pregunta.setVisible(false); // Ocultar la pregunta al hacer clic en el cuadro de información
                                 flechaDos.setVisible(true); // Mostrar la flecha al hacer clic en el cuadro de información
@@ -317,7 +333,12 @@ class BasicoCinco extends Phaser.Scene {
                                     imageWidth: 100, // Ancho de la imagen
                                     imageHeight: 100, // Alto de la imagen
                                     imageAlt: 'Exclamación', // Texto alternativo
-                                }); 
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        sonidos.vamos.play(); // Reproducir el sonido de clic
+                                        
+                                    }
+                                });
                             }
                         }); 
                     }
@@ -353,6 +374,7 @@ class BasicoCinco extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flechaDos.on('pointerdown', () => {
+            sonidos.musicaFlecha.play(); // Reproducir el sonido de la flecha
             this.cameras.main.fadeOut(500, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoSeis'); 

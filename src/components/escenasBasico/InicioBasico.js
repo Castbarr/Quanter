@@ -9,8 +9,12 @@ class InicioBasico extends Phaser.Scene {
     preload(){
     }
     create(){
+        const sonidos = this.registry.get('sonidos');
+
         this.cameras.main.fadeIn(500, 0, 0, 0);
+        sonidos.uf.play();
         this.time.delayedCall(1000, () => {
+        sonidos.musicaEnfoque.play(); // Reproducir la música de fondo
         const cam = this.cameras.main;
         cam.setBounds(0, 0, 1000, 600);
         cam.setZoom(1);
@@ -20,15 +24,12 @@ class InicioBasico extends Phaser.Scene {
         this.time.delayedCall(2000, function () {
             cam.zoomTo(1, 1000); // Zoom out
             informacion.setVisible(true);
+            sonidos.musicaEnfoque.play(); // Detener la música de fondo
         });
         });
 
         this.add.image(500, 300, 'fondoPuerta');
         mostrarPuntos(this); // Mostrar puntos en la escena
-        const puntos = this.registry.get('puntos');
-        if(puntos === 0) {
-        this.registry.set('puntos', puntos +10);
-        }
 
         const informacion = this.add.image(503, 260, 'informacion').setInteractive();
         informacion.setAlpha(.1);
@@ -51,6 +52,7 @@ class InicioBasico extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         informacion.on('pointerdown', () => {
+            sonidos.mmm.play(); // Reproducir la música de fondo
             informacion.setVisible(false); // Ocultar el cuadro de información
             Swal.fire({
                   showClass:{
@@ -76,10 +78,10 @@ class InicioBasico extends Phaser.Scene {
                  imageUrl: globalThis.personaje, // Ruta de la imagen
                  imageWidth: 100, // Ancho de la imagen
                  imageHeight: 100, // Alto de la imagen
-                 imageAlt: 'Exclamación', // Texto alternativo
-                       
+                 imageAlt: 'Exclamación', // Texto alternativo   
              }).then((result) => {
                  if (result.isConfirmed) {
+                     sonidos.musicaInformacion.play(); // Detener la música de fondo
                      libro.setVisible(true);
                  }
              }) 
@@ -107,7 +109,9 @@ class InicioBasico extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         flecha.on('pointerdown', () => {
-            this.cameras.main.fadeOut(500, 0, 0, 0);
+            sonidos.musicaFlecha.play(); // Reproducir la música de fondo
+            sonidos.caminando.play(); // Reproducir la música de fondo
+            this.cameras.main.fadeOut(3000, 0, 0, 0);
             this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.start('BasicoDos'); // Cambia a la escena BasicoDos
             });
@@ -135,6 +139,7 @@ class InicioBasico extends Phaser.Scene {
             repeat: -1          // Infinito
         });
         libro.on('pointerdown', () => {
+            sonidos.musicaLibro.play(); // Reproducir la música de fondo
             Swal.fire({
                 showClass: {
                     popup: `
@@ -157,6 +162,7 @@ class InicioBasico extends Phaser.Scene {
                  background: 'transparent url(./assets/Pergamino.png)',
              }).then((result) => {
                 if (result.isConfirmed) {
+                    sonidos.musicaLibro.play(); // Detener la música de fondo
                     flecha.setVisible(true);
                 }
             }) 
