@@ -267,7 +267,7 @@ class BasicoVeinticuatro extends Phaser.Scene {
                     `
                         },
                     title: '¡Excepcional!',
-                    html: `<p>Estamos dentro.¡Quitemos la seguridad del complejo</p>`,
+                    html: `<p>Estamos dentro.¡Quitemos la seguridad de las puertas</p>`,
                     confirmButtonText: 'Continuar',
                     allowOutsideClick: false,
                     imageUrl: globalThis.personaje, // Ruta de la imagen

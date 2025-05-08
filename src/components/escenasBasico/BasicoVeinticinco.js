@@ -151,7 +151,7 @@ class BasicoVeinticinco extends Phaser.Scene {
                     animate__faster
                 `
                   },
-                title: '¡Desactivemos toda la seguridad!',
+                title: '¡Desactivemos la seguridad de todas las puertas!',
                 html: `<p>Ya solo falta esto. Me queda poco tiempo, la seguridad extrema esta a punto de activarse. ¡De prisa</p>`,
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false,

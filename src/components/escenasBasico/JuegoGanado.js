@@ -13,7 +13,7 @@ class JuegoGanado extends Phaser.Scene {
         const puntosIniciales = this.registry.get('puntosIniciales');
         let calificacion = 0;
 
-        let calificacionInicial = 10/puntosIniciales * puntos;
+        let calificacionInicial = (10/puntosIniciales) * puntos;
         calificacionInicial = Math.round(calificacionInicial);
         
 
