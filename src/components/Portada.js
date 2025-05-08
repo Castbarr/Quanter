@@ -17,7 +17,7 @@ class Portada extends Phaser.Scene {
     this.add.image(500, 300, 'fondo');
     const logo = this.add.image(500, 300, 'logoCompu');
      // Creamos el texto fuera de la pantalla (a la derecha)
-     const text = this.add.text(1250, 450, '¡Bienvenido!...Click en la pantalla', {
+     const text = this.add.text(1250, 450, '¡Bienvenido!...Click en menú para continuar', {
       font: '32px Arial',
       fill: '#ffffff'
   }).setOrigin(0.5);

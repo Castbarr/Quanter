@@ -1,8 +1,8 @@
 {
-  "name": "compu-apprende",
+  "name": "compu-apprende-cap1",
   "version": "0.0.1",
   "description": "A Quasar Project",
-  "productName": "Compu-Apprende",
+  "productName": "Compu-Apprende-cap1",
   "author": "Juan Pablo Castillo Barrera <jpcb777@hotmail.com>",
   "type": "module",
   "private": true,

@@ -85,7 +85,25 @@ function sobreElJuego() {
     title: 'Sobre el Juego',
     html: `
       <p>Este juego es un proyecto educativo diseñado para ayudar a los estudiantes a aprender sobre los fundamentos de la computación.</p>
-      <p>Desarrollado por: <strong>Tu Nombre</strong></p>
+      <p>Desarrollado por: <strong>Juan Pablo Castillo Barrera @Castbarr_mentor</strong></p>
+      <p>El presente, es el inicio de una serie de juegos educativos enfocados al aprendizaje de los fundamentos de la computación, 
+      tocando temas de nivel muy básico y paulatinamente se irán introduciendo temas un poco más avanzados y de actualidad.</p>
+      <h6>Sinopsis del juego:</h6>
+      <p>El presente juego se desarrolla dentro de una corporación tecnológica a donde el protagonista fue a realizar un trabajo y por descuido
+      lo dejan atrapado dentro de las instalaciones. Esto al finalizar el turno de labores dentro de dicha empresa. El problema principal y
+      más peligroso es que a cierta hora después de desalojada la empresa, se activa una seguridad muy extrema dentro del complejo,
+      la cual consiste en rayos láser en los pasillos y robots armados, los cuales tienen sensores que detectan los movimientos en las áreas y
+      en base a ello atacan. La misión es desactivar la seguridad de las puertas para poder salir.</p>
+      <h6>Modo de juego:</h6>
+      <p>El juego tiene 3 niveles, la única diferencia es el nivel de créditos con que se cuenta al inicio. Los puntos, son los créditos con que
+      se inicia en el nivel, en el nivel básico se cuentan con 7 puntos, el nivel medio nos da 5 y el nivel avanzado 3. Los puntos se pierden al 
+      contestar las respuestas erróneamente. Se descuenta un punto por cada desacierto. Si te quedas sin puntos pierdes.</p>
+      <h6>Mecánica de juego:</h6>
+      <p>El juego utiliza señales visuales para guiarnos: el símbolo de triángulo con signo de admiración simboliza información de acción,
+      la flecha verde significa la guia hacia donde debemos movernos o para retroceder si queremos, el signo de interrogación quiere decir pregunta,
+      es donde tendremos que responder cuestiones  para seguir avanzando, el libro, que normalmente está en la parte superior derecha nos da toda 
+      la información para responder las preguntas.</p>
+      <p>¡Diviértete aprendiendo!</p>
     `,
     grow: 'fullscreen',
   });
